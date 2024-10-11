@@ -1,0 +1,119 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <title>box con testi</title>
+    <style>
+	#Primo{background-color: #cbd2f7;
+            width: 200px;
+            height: 200px;
+            border: 10px solid black;
+            padding: 20px;
+            margin: 5px 5px 5px 5px
+        }
+
+        #Secondo{background-color:#cbd2f7 ;
+            width: 200px;
+            height: 200px;
+            border: 10px solid black;
+            padding: 20px;
+            margin: 5px 5px 5px 5px
+        }
+
+        #Terzo{background-color: #cbd2f7;
+            width: 200px;
+            height: 200px;
+            border: 10px solid black;
+            padding: 20px;
+            margin: 5px 5px 5px 5px
+        }
+
+        #Quart{background-color: #cbd2f7;
+            width: 200px;
+            height: 200px;
+            border: 10px solid black;
+            padding: 20px;
+            margin: 5px 5px 5px 5px
+        }
+
+        #Quinto{background-color: #cbd2f7;
+            width: 200px;
+            height: 200px;
+            border: 10px solid black;
+            padding: 20px;
+            margin: 5px 5px 5px 5px
+        }
+    </style>
+
+
+</head>
+<body>
+    <div id="Primo">
+       “Fino a oggi la maggior parte degli scienziati è stata troppo occupata nello sviluppo di nuove teorie che descrivono che cosa sia l'universo per porsi la domanda perché?”
+        <p></p>
+        -Stephen Hawking
+
+
+
+
+	</div>
+	
+    <div id="Secondo">
+        “Lo scienziato nel suo laboratorio non è solo un tecnico, è anche un bambino davanti a fenomeni della Natura che lo affascinano come un racconto di fate.”
+        <p></p>
+        -Marie Curie
+
+
+
+
+
+    </div>
+
+    <div id="Terzo">
+        “Qualsiasi marmocchio può uccidere una pulce: tutti gli studiosi delle accademie del mondo non sono in grado di crearne una.”
+        <p></p>
+        -Albert Einstein
+
+
+
+
+
+    </div>
+
+    <div id="Quarto">
+      “Gli scienziati sognano di fare grandi cose. Gli ingegneri le realizzano.”
+        <p></p>
+        -James Michener
+
+
+
+
+    </div>
+
+    <div id="Quinto">
+       “Gli scienziati odierni hanno sostituito gli esperimenti con la matematica e vagano smarriti equazione dopo equazione e alla fine costruiscono una struttura che non ha relazione con la realtà.”
+        <p></p>
+        -Nikola Tesla
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

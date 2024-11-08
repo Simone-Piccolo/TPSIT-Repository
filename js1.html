@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javascript1 </title>
+    <style>
+        .button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #dceb0c;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #e688fd;
+}
+
+.button:hover {background-color: #fab6e9}
+
+.button:active {
+  background-color: #d69c31;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.button2 {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #9afd9f;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button2:hover {background-color: #8e723e}
+
+.button2:active {
+  background-color: #51b6a5;
+  box-shadow: 0 5px #1d1c1c;
+  transform: translateY(4px);
+}
+
+
+.button3 {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #3e8e73de;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #948e8e;
+}
+
+.button3:hover {background-color: #3e8e4f}
+
+.button3:active {
+  background-color: #6ea2f5;
+  box-shadow: 0 5px #00040a;
+  transform: translateY(4px);
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <h2> Alert Button</h2>
+    <button class="button" onclick="MostraAlert()">Click Me</button>
+    
+
+    
+    <h2> Bottone 1 - "Pressed Effect"</h2>
+    <button class="button2" onclick="MostraClic()">Click Me</button>
+    
+    
+
+
+    <h2>Bottone 2 - "Pressed Effect"</h2>
+    <button class="button3" onclick="MostraButton()">Click Me</button>
+    
+
+   
+
+
+
+
+    <script>
+        function MostraAlert(){
+            alert("forza juve: ");
+        }
+
+        function MostraClic(){
+            alert("sempre: ");
+        }
+
+        function MostraButton() {
+            alert("fino alla fine: ");
+        }
+
+        
+
+    </script>
+    
+</body>
+</html>

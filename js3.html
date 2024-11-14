@@ -1,0 +1,88 @@
+html lang="en">
+<head>
+    <style>
+    #bottone {
+        display: block;
+        margin-bottom: 10px;
+        padding: 15px 25px;
+        font-size: 24px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #80befc;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #393838;
+        }
+
+    #bottone:hover {background-color: #a3f3a9}
+
+    #bottone:active {
+        background-color: #f18ef6;
+        box-shadow: 0 5px #3a3a3a;
+        transform: translateY(4px);
+        }
+    .PrimoBoxHeader{background-color: #b1bbf3;
+        width: 200px;
+        height: 200px;
+        border: 10px solid rgb(239, 112, 112);
+        padding: 20px;
+        margin: 5px 5px 5px 5px
+        }
+        
+    </style>
+    <title>JS3  </title>
+</head>
+<body>
+
+    <div id="testo" class="PrimoBoxHeader">
+        " Meglio aggiungere vita ai giorni
+        che non giorni alla vita."
+        <p></p>
+        -Rita Levi Montalcini
+    </div>
+    <button id="bottone" onclick="nascondiTesto('testo')">Nascondi testo Rita Levi Montalcini</button>
+
+ <div id="testo2" class="PrimoBoxHeader">
+     "Lo scienziato nel suo laboratorio non è solo un tecnico, è anche un bambino davanti
+      a fenomeni della Natura che lo affascinano come un racconto di fate."
+        <p></p>
+        -Marie Curie
+    </div>
+    <button id="bottone" onclick="nascondiTesto('testo2')">Nascondi testo Marie Curie </button>
+    
+    <div id="testo3" class="PrimoBoxHeader">
+        "Qualsiasi marmocchio può uccidere una pulce: 
+        tutti gli studiosi delle accademie del mondo non sono in grado di crearne una"
+        <p></p>
+        -Albert Einstein
+    </div>
+    <button id="bottone" onclick="nascondiTesto('testo3')">Nascondi testo Albert Heinstein</button>
+
+    <div id="testo4" class="PrimoBoxHeader">
+        "“Gli scienziati sognano di fare grandi cose,
+        Gli ingegneri le realizzano."
+        <p></p>
+        -James Michener
+    </div>
+    <button id="bottone" onclick="nascondiTesto('testo4')">Nascondi testo James Michener</button>
+
+    <div id="testo5" class="PrimoBoxHeader">
+        "Gli scienziati odierni hanno sostituito gli esperimenti con la matematica e vagano smarriti
+         equazione dopo equazione e alla fine costruiscono una struttura che non ha relazione con la realtà."
+        <p></p>
+        -Nikola Tesla
+    </div>
+    <button id="bottone" onclick="nascondiTesto('testo5')">Nascondi testo Nikola Tesla</button>
+    
+    <script>
+        function nascondiTesto(idTesto) {
+            const testo = document.getElementById(idTesto);
+            testo.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

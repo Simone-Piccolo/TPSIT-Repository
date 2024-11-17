@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        Body {
+            font-family: sans-serif;
+            background-color: #a1abe39c;
+        }
+
+        Div {
+            justify-content: center;
+            justify-items: center;
+        }
+
+        #bottone {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #2d6ada;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #696666;
+        }
+
+        #bottone:hover {
+            background-color: #708ec5
+        }
+
+        #bottone:active {
+            background-color: #2b529b;
+            box-shadow: 0 5px #767676;
+            transform: translateY(4px);
+        }
+
+        .PrimoBoxHeader {
+            width: 50%;
+            height: 20%;
+            border: 5px solid rgb(46, 59, 125);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        button{
+            margin-top: 10px;
+        }
+
+        input[type=text] {
+            height: 50px;
+            width: 100px;
+            border: 5px solid rgb(156, 223, 246);
+            border-radius: 12px;
+        }
+
+        input:focus {
+            background-color: rgb(234, 247, 252);
+        }
+
+        image {
+            display: flex;
+            border-radius: 40px;
+            height: 400px;
+            width: 600px;
+            margin-top: 100px;
+        }
+    </style>
+    <title>JS4,input e calcoli </title>
+</head>
+
+<body>
+    <div>
+        <p></p>
+        <label for="partenza" style="font-weight: bold">Punto di Partenza : </label>
+        <input type="text" name="" id="Partenza">
+
+        <label for="pausa" style="font-weight: bold">Punto di Pausa : </label>
+        <input type="text" name="" id="Pausa">
+
+        <label for="arrivo" style="font-weight: bold">Punto d'arrivo : </label>
+        <input type="text" name="" id="arrivo">
+    </div>
+
+    <div>
+        <button id="bottone" onclick="calcolo()">Calcolo del
+            dislivello</button>
+        <p id="output" style="font-weight: bold"> Risultato: </p>
+
+        <div id="image">
+            <img src="https://www.montagna.tv/wp-content/uploads/2021/04/mountains-3111591_1920.jpg"
+                alt="">
+        </div>
+
+        <script>
+            const elementOut = document.getElementById("output");
+            function calcolo() {
+                let v1 = document.getElementById("Partenza").value;
+                let v2 = document.getElementById("Pausa").value;
+                let v3 = document.getElementById("arrivo").value;
+
+                let dislivello = v2 - v1;
+                let dislivello2 = v3 - v2;
+                let Somma = dislivello + dislivello2;
+
+
+
+                elementOut.innerHTML += " Il Dislivello è di " + Somma + " Metri";
+            }
+        </script>
+
+</body>
+
+</html>

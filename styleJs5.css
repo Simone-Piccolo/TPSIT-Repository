@@ -40,7 +40,7 @@ input:focus {
     font-weight: bold;
 }
 
-#bottone {
+#pulsante {
     display: inline-block;
     margin-bottom: 10px;
     padding: 15px 25px;
@@ -56,11 +56,11 @@ input:focus {
     box-shadow: 0 9px #aba9a9;
 }
 
-#bottone:hover {
+#pulsante:hover {
     background-color: #7ca7f7
 }
 
-#bottone:active {
+#pulsante:active {
     background-color: #5673a8;
     box-shadow: 0 5px #615e5e;
     transform: translateY(4px);

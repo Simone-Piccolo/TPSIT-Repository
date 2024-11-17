@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Js5 </title>
+    <link rel="stylesheet" href="style\styleJs5.css">
+</head>
+
+<body onload="inizio()">
+    <div class="container">
+        <h1>Calcolo media di</h1>
+        <h2 id="nome">Nome </h2>
+        <label for="numero1">Primo Voto:</label>
+        <input type="text" id="numero1">
+        <br>
+        <label for="numero2">Secondo Voto:</label>
+        <input type="text" id="numero2">
+        <br>
+        <label for="numero3">Terzo Voto:</label>
+        <input type="text" id="numero3">
+        <br>
+        <label for="numero4">Quarto Voto:</label>
+        <input type="text" id="numero4">
+        <br>
+        <label for="numero5">Quinto Voto:</label>
+        <input type="text" id="numero5">
+        <br>
+        <div class="result">
+            <button id="pulsante" onclick="gestisciCalcolo()">Clicca per Calcolare la media</button>
+            <p id="output" style="font-weight: bold"> La Media è: </p>
+        </div>
+    </div>
+
+    <script>
+        function inizio() {
+            let n = prompt("Inserisci Il Tuo Nome:")
+            document.getElementById("nome").innerHTML = n;
+        }
+
+        function calcoloMedia(a, b, c, d, e) {
+            return (a + b + c + d + e) / 5;
+        }
+
+        const elementOut = document.getElementById("output");
+        function gestisciCalcolo() {
+            const numero1 = parseFloat(document.getElementById('numero1').value);
+            const numero2 = parseFloat(document.getElementById('numero2').value);
+            const numero3 = parseFloat(document.getElementById('numero3').value);
+            const numero4 = parseFloat(document.getElementById('numero4').value);
+            const numero5 = parseFloat(document.getElementById('numero5').value);
+
+            if (isNaN(numero1) || isNaN(numero2) || isNaN(numero3) || isNaN(numero4) || isNaN(numero5)) {
+                document.getElementById('result').innerText = "Per favore, inserisci tutti e 5 i numeri.";
+                return;
+            }
+
+            const media = calcoloMedia(numero1, numero2, numero3, numero4, numero5);
+
+            elementOut.innerHTML += ` ${media.toFixed(2)}`;
+        }
+    </script>
+
+
+</body>
+
+</html>

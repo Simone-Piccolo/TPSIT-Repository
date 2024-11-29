@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatore Incrementale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        h1 {
+            color: #0044cc;
+        }
+        #out1 {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff6347;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #0044cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0033aa;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contatore Incrementale con setInterval</h1>
+    <p>Ogni secondo il numero aumenta!</p>
+    <button onclick="startCounter()">Avvia Contatore</button>
+
+    <div>
+        <p id="out1"></p>
+    </div>
+
+<script>
+    let counter = 0;
+    let interval;
+
+    function startCounter() {
+        // Controlla se l'intervallo è già attivo
+        if (interval) {
+            clearInterval(interval); // Ferma l'intervallo precedente, se esiste
+        }
+
+        interval = setInterval(() => {
+            counter++; // Incrementa il contatore
+            document.getElementById("out1").innerText = counter; // Mostra il nuovo numero
+        }, 1000); // Aggiorna ogni secondo (1000 ms)
+    }
+</script>
+
+</body>
+</html>

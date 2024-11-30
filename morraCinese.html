@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Gioco Morra Cinese </title>
+    <link rel="stylesheet" href="styleMorraCinese.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gioco della Morra Cinese - Bot vs Te!</h1>
+        
+        <p>Scegli la tua mossa:</p>
+        
+        <!-- Bottoni per scegliere la mossa -->
+        <div id="choices">
+            <button class="choice" onclick="userChoice('sasso')">Sasso</button>
+            <button class="choice" onclick="userChoice('carta')">Carta</button>
+            <button class="choice" onclick="userChoice('forbice')">Forbice</button>
+        </div>
+
+        <h2>Risultato:</h2>
+        <p id="out1"></p> <!-- La mossa dell'utente -->
+        <p id="out2"></p> <!-- La mossa del bot -->
+        <p id="out3"></p> <!-- Il risultato finale -->
+    </div>
+
+    <script>
+        // Funzione che gestisce la scelta dell'utente
+        function userChoice(userMove) {
+            // Mostriamo la mossa dell'utente
+            document.getElementById("out1").innerHTML = "La tua scelta: " + userMove;
+
+            // Calcolo della mossa del bot
+            let botMove = botChoice();
+
+            //  mossa del bot
+            document.getElementById("out2").innerHTML = "La mossa del bot: " + botMove;
+
+            // Determiniamo il vincitore
+            let winner = determineWinner(userMove, botMove);
+            document.getElementById("out3").innerHTML = winner;
+        }
+
+        // Funzione che genera una scelta casuale per il bot
+        function botChoice() {
+            let morraArray = ["sasso", "carta", "forbice"];
+            let randomIndex = Math.floor(Math.random() * 3); // Genera un numero tra 0 e 2
+            return morraArray[randomIndex];
+        }
+
+        // Funzione che determina il vincitore
+        function determineWinner(userMove, botMove) {
+            if (userMove === botMove) {
+                return "È un pareggio!";
+            }
+            if (
+                (userMove === "sasso" && botMove === "forbice") ||
+                (userMove === "carta" && botMove === "sasso") ||
+                (userMove === "forbice" && botMove === "carta")
+            ) {
+                return "Hai vinto!";
+            } else {
+                return "Il bot ha vinto!";
+            }
+        }
+    </script>
+</body>
+</html>

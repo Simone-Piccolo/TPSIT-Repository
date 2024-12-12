@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Numerica array1</title>
+</head>
+<body>
+    <h1>Analisi Numerica array1</h1>
+    <p>Imparo ad usare gli array con i numeri</p>
+    <p>Sviluppo algoritmi che inseriscono numeri particolari negli array</p>
+
+    <p>Lista numeri casuali tra 1 e 100:</p>
+    <p id="out1"></p>
+
+    <p>Lista 100 numeri consecutivi tra 1 e 1000:</p>
+    <p id="out2"></p>
+
+    <p>Lista 10 numeri primi casuali:</p>
+    <p id="out3"></p>
+
+    <p>Lista numeri primi tra 1 e 100:</p>
+    <p id="out4"></p>
+
+    <p> Lista numeri da 1 a 100 con accanto i loro fattori</p>
+    <p id="out5"></p>
+
+    
+
+    <script>
+        
+        let numeri = [];
+        function InserisciNumeroCasuale(i) {
+            let numeroCasuale = Math.floor(Math.random() * 100) + 1; 
+            numeri[i] = numeroCasuale;
+        }
+
+        
+        for (let i = 0; i < 100; i++) {
+            InserisciNumeroCasuale(i);
+        }
+
+       
+        let out1 = '';
+        for (let i = 0; i < numeri.length; i++) {
+            out1 += numeri[i] + ', ';  
+        }
+        document.getElementById("out1").innerHTML = out1;
+
+     
+        let numeriConsecutivi = [];
+        for (let i = 1; i <= 100; i++) {
+            numeriConsecutivi.push(i);
+        }
+
+        // Stampa i numeri consecutivi
+        let out2 = '';
+        for (let i = 0; i < numeriConsecutivi.length; i++) {
+            out2 += numeriConsecutivi[i] + ', ';  
+        }
+        document.getElementById("out2").innerHTML = out2;
+
+        
+        function IsPrime(n) {
+            if (n < 2) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+
+        let numeriPrimiCasuali = [];
+        while (numeriPrimiCasuali.length < 10) {
+            let numeroCasuale = Math.floor(Math.random() * 100) + 1;
+            if (IsPrime(numeroCasuale) && !numeriPrimiCasuali.includes(numeroCasuale)) {
+                numeriPrimiCasuali.push(numeroCasuale);
+            }
+        }
+
+        // Stampa i numeri primi casuali
+        let out3 = '';
+        for (let i = 0; i < numeriPrimiCasuali.length; i++) {
+            out3 += numeriPrimiCasuali[i] + ', '; 
+        }
+        document.getElementById("out3").innerHTML = out3;
+
+        
+        let numeriPrimi = [];
+        for (let i = 1; i <= 100; i++) {
+            if (IsPrime(i)) {
+                numeriPrimi.push(i);
+            }
+        }
+
+        // Stampa i numeri primi tra 1 e 100
+        let out4 = '';
+        for (let i = 0; i < numeriPrimi.length; i++) {
+            out4 += numeriPrimi[i] + ', ';  
+        }
+        document.getElementById("out4").innerHTML = out4;
+
+        //funzione per stampare i fattori
+        function getFattori(n) {
+            let fattori = [];
+            for (let i = 1; i <= n; i++) {
+                if (n % i === 0) {
+                    fattori.push(i); 
+                }
+            }
+            return fattori;
+        }
+        //Stampa i numeri tra 1 e 100 con accanto i loro fattori
+        let out5="";
+        for (let i =1 ; i<=100; i++ ) {
+            let fattori=getFattori(i)
+            out5+= i+":" + fattori.join(",") + "<br>";
+        }
+
+        document.getElementById("out5").innerHTML=out5;
+
+
+
+    </script>
+</body>
+</html>

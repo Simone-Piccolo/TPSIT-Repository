@@ -1,0 +1,50 @@
+ <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Simulazione Verifica</title>
+        <script>
+            const interval = 8000;  // Intervallo di 8 secondi
+    
+            function getRandomNumber() {
+                return Math.floor(Math.random() * 1000) + 1;
+            }
+    
+            function isPrime(n) {
+                if (n <= 1) return false;
+                for (let i = 2; i <= Math.sqrt(n); i++) {
+                    if (n % i === 0) return false;
+                }
+                return true;
+            }
+    
+            setInterval(function() {
+                let numero = getRandomNumber();
+                let pari= (numero % 2 === 0) ? "pari" : "dispari"; //si ottiene se il numero è pari o dispari
+                let primo = isPrime(numero) ? "primo" : "non primo"; //si ottiene se il numero è primo o non primo
+                let doppio = numero * 2; //Si ottiene il doppio del numero
+                let metà = Math.floor(numero / 2); //si ottiene la metà intera del numero
+                let complemento = 1000 - numero; //Si ottiene il complemento del numero
+                let somma_precedente_successivo = (numero - 1) + numero + (numero + 1); //si sommano il precedente con il successivo
+                let moltiplicato_per = numero * 3.14; //Numero moltiplicato per 3,14
+    
+                document.getElementById("output").innerHTML = `
+                    <p>Numero: ${numero}</p>
+                    <p>È un numero ${pari}.</p>
+                    <p>È un numero ${primo}.</p>
+                    <p>Il doppio è: ${doppio}</p>
+                    <p>La metà intera è: ${metà}</p>
+                    <p>Il complemento è: ${complemento}</p>
+                    <p>Somma con precedente e successivo: ${somma_precedente_successivo}</p>
+                    <p>Moltiplicato per 3,14: ${moltiplicato_per}</p>
+                `;
+            }, interval);
+        </script>
+    </head>
+    <body>
+        <h1>Simulazione Verifica</h1>
+        <div id="output"></div>
+    </body>
+    </html>
+    

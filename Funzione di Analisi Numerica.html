@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funzione di Analisi Numerica</title>
+    <link rel="stylesheet" href="style funzione di  analisi numerica.css"> 
+</head>
+<body>
+
+    <div id="output"></div>
+
+    <script>
+        // Funzione per verificare se un numero è primo
+        function isPrimo(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        // Funzione per stampare le informazioni per ogni numero
+        function stampaProprieta() {
+            let output = '';
+
+           
+            for (let n = 1; n <= 10000; n++) {
+                let riga = '';
+
+                // Determina se il numero è pari o dispari
+                let classeTipo = (n % 2 === 0) ? 'pari' : 'dispari';
+                riga += `<span class="${classeTipo}">${(n % 2 === 0) ? 'Pari' : 'Dispari'}</span>`;
+
+                // Verifica se il numero è primo
+                if (isPrimo(n)) {
+                    riga += ' | <span class="primo">Primo</span>';
+                } else {
+                    riga += ' | Non primo';
+                }
+
+                // Stampa il doppio e la metà intera
+                riga += ` | Doppio: ${n * 2} | Meta intera: ${Math.floor(n / 2)}`;
+
+                // Calcola e stampa il complemento rispetto a 1000
+                riga += ` | Complemento (1000 - n): ${1000 - n}`;
+
+                // Somma del numero con il precedente e il successivo
+                riga += ` | Somma (n + (n-1) + (n+1)): ${n + (n - 1) + (n + 1)}`;
+
+                // Moltiplicazione per 3.14
+                riga += ` | Moltiplicato per 3.14: ${(n * 3.14).toFixed(2)}`;
+
+                // Moltiplicazione per 2.71
+                riga += ` | Moltiplicato per 2.71: ${(n * 2.71).toFixed(2)}`;
+
+                // Aggiungi la riga con  colore rosso se è primo
+                output += isPrimo(n) ? `<p class="primo">${riga}</p>` : `<p>${riga}</p>`;
+            }
+
+            // Inserisce il risultato 
+            document.getElementById('output').innerHTML = output;
+        }
+
+        stampaProprieta();
+    </script>
+</body>
+</html>

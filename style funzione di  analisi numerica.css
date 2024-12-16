@@ -1,0 +1,100 @@
+/* Reset di base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo della pagina */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #4f9ff5, #d1c4e9);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Contenitore principale */
+#output {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    height: 80vh;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Stile delle righe */
+p {
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: normal;
+}
+
+/* Colore rosso per i numeri primi */
+.primo {
+    color: #e53935;
+    background-color: #fdecea;
+    font-weight: bold;
+    border-left: 5px solid #e53935;
+}
+
+/* Hover effect per ogni riga */
+p:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+}
+
+/* Aggiungi uno stile per i numeri pari e dispari */
+.pari {
+    color: #388e3c;
+    background-color: #d0f8e3;
+    font-weight: bold;
+}
+
+.dispari {
+    color: #d32f2f;
+    background-color: #f8d7da;
+    font-weight: bold;
+}
+
+/* Stili specifici per la tipografia */
+span {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.primo, .pari, .dispari {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+/* Aggiungi il colore delle scrollbar */
+#output {
+    scrollbar-width: thin;
+    scrollbar-color: #388e3c #f0f0f0;
+}
+
+#output::-webkit-scrollbar {
+    width: 8px;
+}
+
+#output::-webkit-scrollbar-thumb {
+    background-color: #388e3c;
+}
+
+#output::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}

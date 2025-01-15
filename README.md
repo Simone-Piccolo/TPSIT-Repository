@@ -1,7 +1,4 @@
 Questo è il mio repository con esercizi di html,css,javascript.
 
-<img src=https://static.vecteezy.com/ti/vettori-gratis/p1/13313458-html-icona-3d-interpretazione-illustrazione-vettoriale.jpg widht="200" weight="250">
+<img src=https://media.licdn.com/dms/image/v2/D5612AQEulXmUIjxUmg/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1690091298306?e=2147483647&v=beta&t=3j5WVvIVCFZS-qsrGst95NhCDJddz1STbc19t7zkFuE widht="200" weight="250">
 
-<img src=https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/css/css.png widht="250" weight="300">
-
-<img src=https://glue-labs.com/wp-content/uploads/2019/06/2-1.png widht="250" weight="300">

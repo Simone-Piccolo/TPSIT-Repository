@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Esercizio Bootstrap 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+      .accordion-button:not(.collapsed) {
+        background-color: #5aa4f3;
+        color: white;
+      }
+      .accordion-button {
+        background-color: #f8f9fa;
+        color: #004085;
+      }
+      .accordion-item {
+        border: 1px solid #56a6fc;
+      }
+      .accordion-header button {
+        display: flex;
+        align-items: center;
+      }
+      .accordion-header button i {
+        margin-right: 10px;
+      }
+      .accordion-body {
+        background-color: #e9ecef;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container mt-5">
+      <h2>Domande</h2>
+      <div class="accordion" id="accordionExample">
+        
+        <!-- Sezione 1 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <i class="fas fa-laptop-code"></i> Cos'è il cloud computing?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Il cloud computing è l'erogazione di risorse informatiche tramite Internet. Consente l'accesso remoto a server, storage, database e applicazioni, eliminando la necessità di infrastrutture locali.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sezione 2 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <i class="fas fa-mobile-alt"></i> Cos'è la tecnologia 5G?
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              La tecnologia 5G è la quinta generazione di reti mobili. Offre velocità di connessione più rapide, una latenza ridotta e la possibilità di connettere un numero maggiore di dispositivi simultaneamente.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sezione 3 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <i class="fas fa-brain"></i> Cos'è l'intelligenza artificiale (IA)?
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              L'intelligenza artificiale è una disciplina della computer science che sviluppa algoritmi e sistemi capaci di eseguire compiti che normalmente richiederebbero l'intelligenza umana, come il riconoscimento vocale e la guida autonoma.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sezione 4 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              <i class="fas fa-cogs"></i> Cos'è un algoritmo?
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Un algoritmo è una sequenza di istruzioni precise che vengono eseguite per risolvere un problema o raggiungere un determinato obiettivo, come ordinare una lista o fare una ricerca in un database.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sezione 5 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+              <i class="fas fa-database"></i> Cos'è un database?
+            </button>
+          </h2>
+          <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Un database è una raccolta di dati strutturati che possono essere facilmente gestiti e accessibili. Viene utilizzato per archiviare informazioni come utenti, transazioni o prodotti in un formato facilmente consultabile.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

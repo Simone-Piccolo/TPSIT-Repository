@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione Tempi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Registrazione dei Tempi</h1>
+
+    <!-- Pulsanti per registrare i tempi -->
+    <button onclick="registrazioneTempo(0)">Pulsante 1</button>
+    <button onclick="registrazioneTempo(1)">Pulsante 2</button>
+    <button onclick="registrazioneTempo(2)">Pulsante 3</button>
+    <button onclick="registrazioneTempo(3)">Pulsante 4</button>
+
+   
+    <p id="output"></p>
+
+    <script>
+        
+        let primoClick = null;  // Timestamp del primo clic
+        let tempi = [];         // Array per memorizzare i tempi
+
+        // Funzione per registrare il tempo quando un pulsante viene premuto
+        function registrazioneTempo(indice) {
+            let ora = new Date();               // Ottieni la data e ora attuale
+            let timestamp = ora.getTime();      // Ottieni il timestamp in millisecondi
+
+            // Se è il primo click su "Pulsante 1", memorizza il tempo
+            if (primoClick === null && indice === 0) {
+                primoClick = timestamp;
+                document.getElementById("output").innerHTML = "Primo click registrato: " + ora.toLocaleString();
+            }
+            // Se il primo click è già stato registrato, calcola il tempo trascorso
+            else if (primoClick !== null) {
+                let differenza = timestamp - primoClick;  // Calcola la differenza in millisecondi
+                let secondi = Math.floor(differenza / 1000);             // Converte in secondi
+                let decimi = Math.floor((differenza % 1000) / 100);      // Converte in decimi di secondo
+                let millesimi = differenza % 100;                        // Converte in millesimi di secondo
+
+                // Aggiunge il tempo registrato nell'array
+                tempi.push({ secondi, decimi, millesimi });
+
+                // Visualizza il tempo trascorso
+                document.getElementById("output").innerHTML = 
+                    `Tempo dal primo click: ${secondi}s ${decimi} decimi ${millesimi} millesimi`;
+            }
+        }
+    </script>
+
+</body>
+</html>

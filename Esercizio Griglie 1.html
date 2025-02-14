@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+       
+        .grid-2x2, .grid-3x3 {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            display: none; 
+        }
+
+        /* Griglia 2x2 */
+        .grid-2x2 {
+            grid-template-columns: repeat(2, 100px);
+            grid-template-rows: repeat(2, 100px);
+            gap: 5px;
+        }
+
+        .grid-2x2 div {
+            width: 100px;
+            height: 100px;
+        }
+        .cell-1 { background-color: red; }
+        .cell-2 { background-color: blue; }
+        .cell-3 { background-color: green; }
+        .cell-4 { background-color: yellow; }
+
+        /* Griglia 3x3 */
+        .grid-3x3 {
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+        }
+
+        .grid-3x3 div {
+            width: 100px;
+            height: 100px;
+        }
+        .cell-1 { background-color: pink; }
+        .cell-2 { background-color: purple; }
+        .cell-3 { background-color: orange; }
+        .cell-4 { background-color: cyan; }
+        .cell-5 { background-color: brown; }
+        .cell-6 { background-color: gray; }
+        .cell-7 { background-color: lime; }
+        .cell-8 { background-color: teal; }
+        .cell-9 { background-color: violet; }
+
+        
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <title>Esercizio Griglie</title>
+</head>
+<body>
+
+    <button class="btn" onclick="mostraGriglie()">Mostra Griglie</button>
+
+    <div class="grid-2x2">
+        <div class="cell-1"></div>
+        <div class="cell-2"></div>
+        <div class="cell-3"></div>
+        <div class="cell-4"></div>
+    </div>
+
+    <div class="grid-3x3">
+        <div class="cell-1"></div>
+        <div class="cell-2"></div>
+        <div class="cell-3"></div>
+        <div class="cell-4"></div>
+        <div class="cell-5"></div>
+        <div class="cell-6"></div>
+        <div class="cell-7"></div>
+        <div class="cell-8"></div>
+        <div class="cell-9"></div>
+    </div>
+
+    <script>
+        function mostraGriglie() {
+            // Mostra entrambe le griglie quando il bottone viene premuto
+            document.querySelector('.grid-2x2').style.display = 'grid';
+            document.querySelector('.grid-3x3').style.display = 'grid';
+        }
+    </script>
+
+</body>
+</html>

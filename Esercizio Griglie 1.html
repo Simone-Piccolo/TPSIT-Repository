@@ -4,53 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-       
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
         .grid-2x2, .grid-3x3 {
             display: grid;
             justify-content: center;
             align-items: center;
             margin: 20px;
-            display: none; 
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
 
         /* Griglia 2x2 */
         .grid-2x2 {
-            grid-template-columns: repeat(2, 100px);
-            grid-template-rows: repeat(2, 100px);
-            gap: 5px;
+            grid-template-columns: repeat(2, 120px);
+            grid-template-rows: repeat(2, 120px);
         }
 
         .grid-2x2 div {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
         }
-        .cell-1 { background-color: red; }
-        .cell-2 { background-color: blue; }
-        .cell-3 { background-color: green; }
-        .cell-4 { background-color: yellow; }
+        .grid-2x2 div:hover {
+            transform: scale(1.1);
+        }
+        .cell-1 { background-color: #ff6347; }
+        .cell-2 { background-color: #4682b4; }
+        .cell-3 { background-color: #32cd32; }
+        .cell-4 { background-color: #ffeb3b; }
 
         /* Griglia 3x3 */
         .grid-3x3 {
-            grid-template-columns: repeat(3, 100px);
-            grid-template-rows: repeat(3, 100px);
-            gap: 5px;
+            grid-template-columns: repeat(3, 120px);
+            grid-template-rows: repeat(3, 120px);
         }
 
         .grid-3x3 div {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
         }
-        .cell-1 { background-color: pink; }
-        .cell-2 { background-color: purple; }
-        .cell-3 { background-color: orange; }
-        .cell-4 { background-color: cyan; }
-        .cell-5 { background-color: brown; }
-        .cell-6 { background-color: gray; }
-        .cell-7 { background-color: lime; }
-        .cell-8 { background-color: teal; }
-        .cell-9 { background-color: violet; }
+        .grid-3x3 div:hover {
+            transform: scale(1.1);
+        }
 
-        
+        .cell-1 { background-color: #ff69b4; }
+        .cell-2 { background-color: #8a2be2; }
+        .cell-3 { background-color: #ffa500; }
+        .cell-4 { background-color: #00ced1; }
+        .cell-5 { background-color: #8b4513; }
+        .cell-6 { background-color: #808080; }
+        .cell-7 { background-color: #adff2f; }
+        .cell-8 { background-color: #20b2aa; }
+        .cell-9 { background-color: #8a2be2; }
+
         .btn {
             padding: 10px 20px;
             font-size: 16px;
@@ -60,10 +81,17 @@
             color: white;
             border: none;
             border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
         }
 
         .btn:hover {
             background-color: #45a049;
+        }
+
+        /* Mostra le griglie quando il bottone viene premuto */
+        .show-grid {
+            opacity: 1 !important;
         }
     </style>
     <title>Esercizio Griglie</title>
@@ -93,9 +121,8 @@
 
     <script>
         function mostraGriglie() {
-            // Mostra entrambe le griglie quando il bottone viene premuto
-            document.querySelector('.grid-2x2').style.display = 'grid';
-            document.querySelector('.grid-3x3').style.display = 'grid';
+            document.querySelector('.grid-2x2').classList.add('show-grid');
+            document.querySelector('.grid-3x3').classList.add('show-grid');
         }
     </script>
 

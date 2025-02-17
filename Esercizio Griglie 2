@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercizio Griglie 2</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .grid-item {
+      height: 100px;
+      text-align: center;
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Prima riga della griglia -->
+      <div class="col-4">
+        <div class="grid-item" style="background-color: #FF5733;" onclick="handleClick(1)">Elemento 1</div>
+      </div>
+      <div class="col-4">
+        <div class="grid-item" style="background-color: #33FF57;" onclick="handleClick(2)">Elemento 2</div>
+      </div>
+      <div class="col-4">
+        <div class="grid-item" style="background-color: #3357FF;" onclick="handleClick(3)">Elemento 3</div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Seconda riga della griglia -->
+      <div class="col-4">
+        <div class="grid-item" style="background-color: #F1C40F;" onclick="handleClick(4)">Elemento 4</div>
+      </div>
+      <div class="col-4">
+        <div class="grid-item" style="background-color: #8E44AD;" onclick="handleClick(5)">Elemento 5</div>
+      </div>
+      <div class="col-4">
+        <div class="grid-item" style="background-color: #E74C3C;" onclick="handleClick(6)">Elemento 6</div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- Terza riga della griglia -->
+      <div class="col-4">
+        <div class="grid-item" style="background-color: #2ECC71;" onclick="handleClick(7)">Elemento 7</div>
+      </div>
+      <div class="col-4">
+        <div class="grid-item" style="background-color: #3498DB;" onclick="handleClick(8)">Elemento 8</div>
+      </div>
+      <div class="col-4">
+        <div class="grid-item" style="background-color: #1ABC9C;" onclick="handleClick(9)">Elemento 9</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script prompt che fa la moltiplicazione di un numero-->
+  <script>
+    function handleClick(element) {
+      
+      let userInput = prompt("Inserisci un numero per fare un calcolo:");
+      userInput = parseInt(userInput);
+      
+      if (!isNaN(userInput)) {
+        
+        let result = userInput * 2;
+        alert("Il risultato del calcolo è: " + result);
+        
+        
+        document.querySelector(`.grid-item:nth-child(${element})`).innerText = `Risultato: ${result}`;
+      } else {
+        alert("Per favore, inserisci un numero valido.");
+      }
+    }
+  </script>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

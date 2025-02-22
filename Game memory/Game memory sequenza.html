@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Sequenziale</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ07Xr5zH9W1M4uQp3PD84c8x6QQwJeY9he0wHZtZ7e0gRkWojcHpOH41zFH" crossorigin="anonymous">
+  <style>
+    .button-light {
+      background-color: #007bff;
+    }
+    .button-dim {
+      background-color: #6c757d;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .btn {
+      height: 100px;
+      width: 100px;
+      font-size: 24px;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container text-center">
+    <h1 class="my-4">Gioco Memory Sequenziale</h1>
+    <button id="startBtn" class="btn btn-primary btn-lg mb-4">Inizia</button>
+    <div class="grid-container" id="grid">
+      <!-- Pulsanti dinamici -->
+    </div>
+    <div class="message" id="message"></div>
+    <div id="score" class="my-3">Punteggio: 0</div>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybF7rDfjfS6j7kS2me8FE6F2knlN/8X73hxj4NO4gDkR3sZ48" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0bYkK0xhrv5A2+G6I9R5PbbYce5Afoyfd3yD7T97tdf7p8a9" crossorigin="anonymous"></script>
+  <script src="game.js"></script>
+</body>
+</html>
 

@@ -157,20 +157,22 @@
     function handleUserInput(index) {
       if (!gameActive) return;
 
-      userSequence.push(index);
-      const correct = userSequence.length === sequence.length && 
-                      userSequence.every((val, i) => val === sequence[i]);
+      userSequence.push(index);  // Aggiungi l'input dell'utente alla sequenza
 
-      if (correct) {
-        if (userSequence.length === sequence.length) {
-          score++;
-          scoreDisplay.textContent = `Punteggio: ${score}`;
-          message.textContent = "Hai indovinato, prossimo turno!";
-          setTimeout(nextRound, 1000);
-        }
-      } else {
+      // Controlla se l'input dell'utente è corretto
+      if (userSequence[userSequence.length - 1] !== sequence[userSequence.length - 1]) {
+        // Se sbaglia
         message.textContent = "Hai sbagliato! Gioco finito.";
         gameActive = false;
+        return;
+      }
+
+      // Se l'utente ha completato correttamente la sequenza
+      if (userSequence.length === sequence.length) {
+        score++;
+        scoreDisplay.textContent = `Punteggio: ${score}`;
+        message.textContent = "Hai indovinato, prossimo turno!";
+        setTimeout(nextRound, 1000);
       }
     }
   </script>

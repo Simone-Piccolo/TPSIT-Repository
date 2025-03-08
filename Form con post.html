@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form con POST</title>
+    <style>
+        /* Stile per il corpo della pagina */
+        body {
+            font-family: Arial, sans-serif; /* Imposta il font della pagina */
+            background-color: #f4f4f9; /* Colore di sfondo chiaro */
+            display: flex; /* Usa il layout flex per centrare il modulo */
+            justify-content: center; /* Centra il modulo orizzontalmente */
+            align-items: center; /* Centra il modulo verticalmente */
+            height: 100vh; /* Imposta l'altezza della pagina a 100% della viewport */
+            margin: 0; /* Rimuove i margini predefiniti del browser */
+        }
+
+        /* Stile per il modulo */
+        form {
+            background-color: #fff; /* Colore di sfondo bianco per il modulo */
+            padding: 20px; /* Aggiunge spazio interno al modulo */
+            border-radius: 8px; /* Angoli arrotondati */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra leggera per dare profondità */
+            width: 300px; /* Imposta la larghezza del modulo */
+        }
+
+        /* Titolo del modulo */
+        h1 {
+            text-align: center; /* Centra il titolo */
+            color: #333; /* Colore del testo del titolo */
+        }
+
+        /* Stile per le etichette del modulo */
+        label {
+            font-size: 14px; /* Imposta la dimensione del font per le etichette */
+            color: #555; /* Colore grigio scuro per le etichette */
+            margin-bottom: 5px; /* Distanza tra l'etichetta e il campo di input */
+            display: block; /* Mostra l'etichetta come blocco per una buona disposizione */
+        }
+
+        /* Stile per i campi di input (username e età) */
+        input[type="text"], input[type="number"] {
+            width: 100%; /* Rende i campi di input larghi quanto il modulo */
+            padding: 10px; /* Aggiunge padding all'interno del campo di input */
+            margin: 10px 0; /* Aggiunge spazio sopra e sotto i campi di input */
+            border: 1px solid #ccc; /* Aggiunge un bordo grigio chiaro */
+            border-radius: 4px; /* Arrotonda gli angoli dei campi di input */
+            box-sizing: border-box; /* Include il padding e il bordo nelle dimensioni totali del campo */
+        }
+
+        /* Stile per il pulsante di invio */
+        button {
+            width: 100%; /* Rende il pulsante largo quanto il modulo */
+            padding: 10px; /* Aggiunge padding interno al pulsante */
+            background-color: #4CAF50; /* Colore di sfondo verde per il pulsante */
+            color: white; /* Colore del testo bianco per il pulsante */
+            border: none; /* Rimuove il bordo predefinito del pulsante */
+            border-radius: 4px; /* Arrotonda gli angoli del pulsante */
+            cursor: pointer; /* Cambia il cursore quando si passa sopra il pulsante */
+            font-size: 16px; /* Imposta la dimensione del testo */
+        }
+
+        /* Cambia il colore del pulsante quando l'utente ci passa sopra con il mouse */
+        button:hover {
+            background-color: #45a049; /* Cambia il colore di sfondo a verde scuro */
+        }
+
+        /* Stile per il risultato che appare dopo l'invio del modulo */
+        #result {
+            margin-top: 20px; /* Distanza tra il modulo e il risultato */
+            font-size: 16px; /* Imposta la dimensione del font */
+            text-align: center; /* Centra il testo */
+            color: #333; /* Colore del testo */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Modulo di input -->
+    <form id="myForm">
+        <h1>Modulo di Registrazione</h1> <!-- Titolo del modulo -->
+        
+        <!-- Campo per l'username -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required> <!-- Campo di input per username -->
+        
+        <!-- Campo per l'età -->
+        <label for="age">Età:</label>
+        <input type="number" id="age" name="age" required> <!-- Campo di input per età -->
+        
+        <!-- Pulsante per inviare il modulo -->
+        <button type="submit">Invia</button>
+    </form>
+    
+    <!-- Div che mostrerà il risultato dopo l'invio del modulo -->
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita il ricaricamento della pagina quando il modulo viene inviato
+            
+            // Crea un oggetto FormData che raccoglie i dati del modulo
+            let formData = new FormData(this);
+            
+            // Ottieni i valori dei campi di input
+            let username = formData.get("username");
+            let age = formData.get("age");
+            
+            // Mostra il risultato nel div con id "result"
+            document.getElementById("result").innerHTML = 
+                `<p><strong>Username:</strong> ${username}</p><p><strong>Età:</strong> ${age}</p>`;
+        });
+    </script>
+
+</body>
+</html>

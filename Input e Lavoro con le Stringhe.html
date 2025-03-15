@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input e lavoro con le stringhe</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #ff7a18, #af3a9f, #1d1f5a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 350px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        form:hover {
+            transform: translateY(-10px);
+        }
+
+        label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+            color: #fff;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #4eacf8;
+            border-radius: 10px;
+            font-size: 1rem;
+            background-color: #fff;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #1d1f5a;
+            background-color: #f0f0f0;
+            outline: none;
+            box-shadow: 0 0 10px rgba(30, 55, 255, 0.4);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(145deg, #1ab3fa, #0996f5);
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background: linear-gradient(145deg, #2dc2f0, #e6e8f0);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        button:active {
+            background: linear-gradient(145deg, #3c67ff, #18c1df);
+            transform: translateY(1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .output i, .error i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .output p {
+            margin: 10px 0;
+        }
+
+        .error {
+            color: #ff4c4c;
+            background-color: rgba(255, 76, 76, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+        .output i:hover, .error i:hover {
+            color: #ff7a18;
+        }
+
+        .output p, .error p {
+            margin-left: 20px;
+        }
+
+    </style>
+    <script>
+        // Funzione per calcolare la lunghezza della stringa
+        function calcolaLunghezza(str) {
+            return str.length;
+        }
+
+        // Funzione per invertire una stringa
+        function invertiStringa(str) {
+            return str.split('').reverse().join('');
+        }
+
+        // Funzione per unire due stringhe
+        function unisciStringhe(str1, str2) {
+            return str1 + str2;
+        }
+
+        // Funzione per calcolare la somma delle lunghezze delle due stringhe
+        function sommaLunghezze(str1, str2) {
+            let lunghezzaTotale = str1.length + str2.length;
+            if (str1.length > 20 || str2.length > 20) {
+                return "La stringa non può essere più lunga di 20 caratteri!";
+            }
+            return lunghezzaTotale;
+        }
+
+        function gestisciSubmit(event) {
+            event.preventDefault();
+
+            let stringaA = document.getElementById("stringaA").value;
+            let stringaB = document.getElementById("stringaB").value;
+
+            if (stringaA.length > 20 || stringaB.length > 20) {
+                document.getElementById("output").innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        La stringa non può essere più lunga di 20 caratteri!
+                    </div>
+                `;
+                return;
+            }
+
+            let lunghezzaA = calcolaLunghezza(stringaA);
+            let lunghezzaB = calcolaLunghezza(stringaB);
+            let stringaAInversa = invertiStringa(stringaA);
+            let stringaBInversa = invertiStringa(stringaB);
+            let stringaUnita = unisciStringhe(stringaA, stringaB);
+            let sommaLunghezzeRisultato = sommaLunghezze(stringaA, stringaB);
+
+            document.getElementById("output").innerHTML = `
+                <div class="output">
+                    <i class="fas fa-ruler"></i>Lunghezza di A: ${lunghezzaA}<br>
+                    <i class="fas fa-ruler"></i>Lunghezza di B: ${lunghezzaB}<br>
+                    <i class="fas fa-undo"></i>A inversa: ${stringaAInversa}<br>
+                    <i class="fas fa-undo"></i>B inversa: ${stringaBInversa}<br>
+                    <i class="fas fa-link"></i>Stringhe unite: ${stringaUnita}<br>
+                    <i class="fas fa-plus"></i>Somma delle lunghezze: ${sommaLunghezzeRisultato}
+                </div>
+            `;
+        }
+
+        window.onload = function() {
+            document.getElementById("stringForm").addEventListener("submit", gestisciSubmit);
+        }
+    </script>
+</head>
+<body>
+
+    <div>
+        <h1>Input e lavoro sulle stringhe</h1>
+        <form id="stringForm">
+            <label for="stringaA">Inserisci la stringa A:</label>
+            <input type="text" id="stringaA" name="stringaA" required>
+            <label for="stringaB">Inserisci la stringa B:</label>
+            <input type="text" id="stringaB" name="stringaB" required>
+            <button type="submit">Esegui Operazioni</button>
+        </form>
+
+        <div id="output"></div>
+    </div>
+
+</body>
+</html>

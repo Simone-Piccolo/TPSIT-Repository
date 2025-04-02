@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esercizio 1 temporizzatore</title>
+    <title>Esercizio Quadratini</title>
     <style>
         body {
             margin: 0;
@@ -34,46 +34,43 @@
     <div id="blueDiv" class="movingDiv"></div>
     <div id="yellowDiv" class="movingDiv"></div>
     <script>
-        function getRandomPosition(element) {
-            const x = window.innerWidth - element.clientWidth;
-            const y = window.innerHeight - element.clientHeight;
-            const randomX = Math.floor(Math.random() * x);
-            const randomY = Math.floor(Math.random() * y);
-            return [randomX, randomY];
+        function getRandomPosition(max) {
+            return Math.floor(Math.random() * max);
         }
 
         function moveDivs() {
             const blueDiv = document.getElementById('blueDiv');
             const yellowDiv = document.getElementById('yellowDiv');
+            const maxWidth = window.innerWidth - blueDiv.offsetWidth;
+            const maxHeight = window.innerHeight - blueDiv.offsetHeight;
 
-            const [blueX, blueY] = getRandomPosition(blueDiv);
-            const [yellowX, yellowY] = getRandomPosition(yellowDiv);
+            const blueX = getRandomPosition(maxWidth);
+            const blueY = getRandomPosition(maxHeight);
+            const yellowX = getRandomPosition(maxWidth);
+            const yellowY = getRandomPosition(maxHeight);
 
             blueDiv.style.left = `${blueX}px`;
             blueDiv.style.top = `${blueY}px`;
-
             yellowDiv.style.left = `${yellowX}px`;
             yellowDiv.style.top = `${yellowY}px`;
 
-            checkCollision(blueDiv, yellowDiv);
+            if (isOverlapping(blueDiv, yellowDiv)) {
+                blueDiv.style.backgroundColor = 'red';
+                yellowDiv.style.backgroundColor = 'red';
+            } else {
+                blueDiv.style.backgroundColor = 'blue';
+                yellowDiv.style.backgroundColor = 'yellow';
+            }
         }
 
-        function checkCollision(div1, div2) {
+        function isOverlapping(div1, div2) {
             const rect1 = div1.getBoundingClientRect();
             const rect2 = div2.getBoundingClientRect();
 
-            if (
-                rect1.left < rect2.right &&
-                rect1.right > rect2.left &&
-                rect1.top < rect2.bottom &&
-                rect1.bottom > rect2.top
-            ) {
-                div1.style.backgroundColor = 'red';
-                div2.style.backgroundColor = 'red';
-            } else {
-                div1.style.backgroundColor = 'blue';
-                div2.style.backgroundColor = 'yellow';
-            }
+            return !(rect1.right < rect2.left || 
+                     rect1.left > rect2.right || 
+                     rect1.bottom < rect2.top || 
+                     rect1.top > rect2.bottom);
         }
 
         setInterval(moveDivs, 1000);

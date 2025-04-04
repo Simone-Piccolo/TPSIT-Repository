@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Numeri Casuali</title>
+    <style>
+       
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #5e5e5e;
+            margin-bottom: 20px;
+        }
+
+        
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+      
+        #output {
+            margin-top: 30px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            border: 1px solid #ddd;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+       
+        label {
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generatore di Numeri Casuali</h1>
+        <div>
+            <label for="min">Minimo:</label>
+            <input type="number" id="min" value="1" step="any">
+            <label for="max">Massimo:</label>
+            <input type="number" id="max" value="100" step="any">
+        </div>
+        <button onclick="generaNumeri()">Genera Numeri</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function generaNumeri() {
+            const min = parseFloat(document.getElementById('min').value);
+            const max = parseFloat(document.getElementById('max').value);
+            if (isNaN(min) || isNaN(max) || min >= max) {
+                alert("Inserisci un intervallo valido.");
+                return;
+            }
+
+            let numeri = "";
+            let numeriCasuali = [];
+            let medie = [];
+            
+           
+            for (let i = 0; i < 10000; i++) {
+                let numeroCasuale = (Math.random() * (max - min) + min).toFixed(2); 
+                numeriCasuali.push(parseFloat(numeroCasuale));
+            }
+
+            
+            for (let i = 0; i < numeriCasuali.length; i += 50) {
+                let gruppo = numeriCasuali.slice(i, i + 50);
+                let somma = gruppo.reduce((acc, num) => acc + num, 0);
+                let media = somma / gruppo.length;
+                medie.push(media);
+                
+                
+                numeri += gruppo.join(" ") + " | Media: " + media.toFixed(2) + "\n";
+            }
+
+            
+            document.getElementById('output').textContent = numeri;
+            console.log(medie);  
+        }
+    </script>
+</body>
+</html>

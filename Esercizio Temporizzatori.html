@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercitazione con Temporizzatori</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #square {
+      width: 50px;
+      height: 50px;
+      background-color: green;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      border: 2px solid black;
+    }
+    .square {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      display: inline-block;
+      background-color: yellow;
+      border: 2px solid black;
+    }
+    .red {
+      background-color: red;
+    }
+    #squares {
+      margin-top: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div id="square"></div>
+  <div id="squares">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+  </div>
+
+  <script>
+    let square = document.getElementById('square');
+    let position = { top: 20, left: 20 };
+    let step = 50;
+    let direction = 'east';
+
+    function moveSquare() {
+      switch (direction) {
+        case 'east':
+          position.left += step;
+          break;
+        case 'south':
+          position.top += step;
+          break;
+        case 'west':
+          position.left -= step;
+          break;
+        case 'north':
+          position.top -= step;
+          break;
+      }
+
+      if (position.left < 0) position.left = 0;
+      if (position.top < 0) position.top = 0;
+      if (position.left > window.innerWidth - 50) position.left = window.innerWidth - 50;
+      if (position.top > window.innerHeight - 50) position.top = window.innerHeight - 50;
+
+      square.style.left = position.left + 'px';
+      square.style.top = position.top + 'px';
+
+      if (direction === 'east') direction = 'south';
+      else if (direction === 'south') direction = 'west';
+      else if (direction === 'west') direction = 'north';
+      else direction = 'east';
+    }
+
+    setInterval(moveSquare, 1000);
+
+    let squares = document.querySelectorAll('.square');
+    let index = 0;
+
+    function moveRedSquare() {
+      squares[index].classList.remove('red');
+      index = (index + 1) % squares.length;
+      squares[index].classList.add('red');
+    }
+
+    setInterval(moveRedSquare, 1000);
+  </script>
+</body>
+</html>

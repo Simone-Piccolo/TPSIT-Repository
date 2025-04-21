@@ -2,167 +2,156 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Generatore di Numeri Casuali 2 </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di numeri casuali</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Stile base della pagina */
+        
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fa;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            color: #333;
+            min-height: 100vh;
         }
+
+        
         .container {
             background-color: #fff;
-            padding: 30px;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 900px;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
             text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
         }
+
+        p {
+            margin: 0.5rem 0;
+            color: #444;
+            line-height: 1.4;
+        }
+
         canvas {
-            max-width: 100%;
-            margin-top: 20px;
+            margin-top: 1.5rem;
         }
-        #output {
-            margin-top: 20px;
-            font-size: 14px;
-            white-space: pre-wrap;
-            text-align: left;
-            max-height: 200px;
+
+        
+        #numeri_casuali, #divisioni, #media_numeri, #distanze {
+            max-height: 100px;
             overflow-y: auto;
-            border: 1px solid #ddd;
-            padding: 10px;
+            background-color: #f9f9f9;
+            padding: 0.5rem;
             border-radius: 8px;
-            background: #f9f9f9;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Generatore di Numeri Casuali</h1>
+        <p id="numeri_casuali">Numeri casuali:</p> <!-- Paragrafo che mostrerà i numeri casuali generati -->
+        <p id="media_numeri">Media:</p> <!-- Paragrafo per visualizzare la media dei numeri ogni 50 -->
+        <p id="divisioni">Divisioni:</p> <!-- Paragrafo che mostrerà i risultati delle divisioni -->
+        <p id="distanze">Distanze dalla metà del range:</p> <!-- Paragrafo che mostrerà le distanze -->
+        <canvas id="graficoNumeri" width="400" height="200"></canvas> 
+    </div>
 
-<div class="container">
-    <h1>Generatore di Numeri Casuali (0 - 1)</h1>
-    <!-- Output testuale dei dati -->
-    <div id="output"></div>
-    <!-- Canvas per Chart.js -->
-    <canvas id="grafico"></canvas>
-</div>
+    <script>
+        // Dichiarazione delle variabili
+        let arrayNumeriCasuali = []; // Array che conterrà i numeri casuali generati
+        let count = 0; // Variabile contatore per determinare quando calcolare la media
+        let array_divisioni = []; // Array che conterrà i risultati delle divisioni tra numeri successivi
+        let array_distanze = []; // Array che conterrà le distanze dalla metà del range (0.5 per numeri tra 0 e 1)
 
-<script>
-    // Array principali
-    let ArrayNumeriCasuali = []; // Contiene i numeri generati
-    let rapporti = [];           // Contiene i rapporti tra numeri successivi
-    let medie = [];              // Contiene la media ogni 50 numeri
-    let distanze = [];           // Contiene le distanze da 0.5 (centro del range)
+        
+        const divisioni = document.getElementById("divisioni");
+        const numeri_casuali = document.getElementById("numeri_casuali");
+        const mostra_media = document.getElementById("media_numeri");
+        const distanze = document.getElementById("distanze");
 
-    const outputDiv = document.getElementById("output");
+        const L1 = 0; 
+        const L2 = 1; 
 
-    // Inizializzazione del grafico Chart.js
-    const ctx = document.getElementById('grafico').getContext('2d');
-    const chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [], // Etichette X (indice dei dati)
-            datasets: [
-                {
-                    label: 'Numeri Casuali',
-                    data: [],
-                    borderColor: 'blue',
-                    borderWidth: 1,
-                    fill: false
-                },
-                {
-                    label: 'Rapporti',
-                    data: [],
-                    borderColor: 'green',
-                    borderWidth: 1,
-                    fill: false
-                },
-                {
-                    label: 'Distanze dal Centro',
-                    data: [],
-                    borderColor: 'orange',
-                    borderWidth: 1,
-                    fill: false
-                },
-                {
-                    label: 'Medie (ogni 50)',
-                    data: [],
-                    borderColor: 'purple',
-                    borderDash: [5, 5],
-                    borderWidth: 1,
-                    fill: false
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            animation: false,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 1.2 // Valore massimo dell'asse Y
+        // Creazione del contesto per il grafico (Chart.js)
+        const ctx = document.getElementById('graficoNumeri').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line', // Tipo di grafico (linea)
+            data: {
+                labels: [], // Etichette per l'asse x (indice degli elementi)
+                datasets: [{
+                    label: 'Numeri Casuali', // Etichetta per la serie di dati
+                    data: [], // Dati da visualizzare (i numeri casuali)
+                    borderColor: 'rgba(75, 192, 192, 1)', // Colore della linea
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Colore di riempimento sotto la linea
+                    borderWidth: 2, // Larghezza della linea
+                    fill: true, // Riempi sotto la linea
+                    tension: 0.3 // Morbidezza della linea
+                }]
+            },
+            options: {
+                responsive: true, // Rende il grafico reattivo
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Indice' } // Titolo per l'asse X
+                    },
+                    y: {
+                        title: { display: true, text: 'Valore' }, // Titolo per l'asse Y
+                        beginAtZero: true, // Inizia da zero sull'asse Y
+                        max: 1 // Imposta il massimo dell'asse Y a 1
+                    }
                 }
             }
-        }
-    });
+        });
 
-    // Funzione per aggiornare i dati sul grafico
-    function aggiornaGrafico() {
-        const labels = ArrayNumeriCasuali.map((_, i) => i); // Indici come etichette
-        chart.data.labels = labels;
-        chart.data.datasets[0].data = ArrayNumeriCasuali;
-        chart.data.datasets[1].data = rapporti;
-        chart.data.datasets[2].data = distanze;
+        // Funzione per generare numeri casuali e aggiornare i dati
+        function generaNumeriCasuali() {
+            let nuovo_numero = parseFloat(Math.random().toFixed(2)); // Genera un numero casuale tra 0 e 1 con due decimali
+            arrayNumeriCasuali.push(nuovo_numero); // Aggiunge il numero all'array
+            count++; // Incrementa il contatore
 
-        // Prepara dataset medie (solo ai multipli di 50)
-        chart.data.datasets[3].data = Array(labels.length).fill(null);
-        for (let i = 49; i < ArrayNumeriCasuali.length; i += 50) {
-            chart.data.datasets[3].data[i] = medie[Math.floor(i / 50)];
-        }
+            
+            chart.data.labels.push(arrayNumeriCasuali.length); // Aggiunge l'indice (lunghezza dell'array)
+            chart.data.datasets[0].data.push(nuovo_numero); // Aggiunge il numero casuale
+            chart.update(); // Aggiorna il grafico
 
-        chart.update(); // Aggiorna il grafico
-    }
+            let media_teorica = (L2 - L1) / 2; // Calcola la metà del range (per numeri tra 0 e 1, è 0.5)
+            let distanza = Math.abs(nuovo_numero - media_teorica).toFixed(2); // Calcola la distanza dal centro del range (0.5)
+            array_distanze.push(distanza); // Aggiunge la distanza all'array delle distanze
 
-    // Funzione  che viene eseguita ogni 500ms
-    function calcola() {
-        // Genera un numero float tra 0 e 1 con 4 decimali
-        const nuovo = parseFloat((Math.random()).toFixed(4));
-        ArrayNumeriCasuali.push(nuovo); // Aggiunge all'array principale
+            
+            if (arrayNumeriCasuali.length > 1) {
+                let prev = arrayNumeriCasuali[arrayNumeriCasuali.length - 2]; // Numero precedente
+                let divisione = prev === 0 ? "∞" : (nuovo_numero / prev).toFixed(2); // Gestisce il caso di divisione per zero
+                array_divisioni.push(divisione); // Aggiunge la divisione all'array delle divisioni
+            }
 
-        // Calcola il rapporto con il numero precedente
-        if (ArrayNumeriCasuali.length > 1) {
-            let precedente = ArrayNumeriCasuali[ArrayNumeriCasuali.length - 2];
-            rapporti.push(parseFloat((nuovo / precedente).toFixed(4)));
-        } else {
-            rapporti.push(null); // Primo elemento non ha rapporto
-        }
+            // Mostra i numeri casuali, le divisioni e le distanze nel rispettivo paragrafo
+            numeri_casuali.textContent = "Numeri casuali: " + arrayNumeriCasuali.join(", ");
+            divisioni.textContent = "Divisioni: " + array_divisioni.join(", ");
+            distanze.textContent = "Distanze dalla metà del range: " + array_distanze.join(", ");
 
-        // Calcola la distanza da 0.5 (centro del range 0–1)
-        distanze.push(parseFloat(Math.abs(nuovo - 0.5).toFixed(4)));
-
-        // Calcola la media ogni 50 numeri
-        if (ArrayNumeriCasuali.length % 50 === 0) {
-            const gruppo = ArrayNumeriCasuali.slice(-50); // Prendi gli ultimi 50
-            const somma = gruppo.reduce((acc, num) => acc + num, 0);
-            medie.push(parseFloat((somma / 50).toFixed(4)));
+            // Ogni 50 numeri, calcola la media e la visualizza
+            if (count === 50) {
+                let somma = arrayNumeriCasuali.reduce((acc, num) => acc + num, 0); // Somma di tutti i numeri
+                let media = (somma / arrayNumeriCasuali.length).toFixed(2); // Calcola la media
+                mostra_media.textContent = "La media è: " + media; // Mostra la media
+                count = 0; 
+            }
         }
 
-        // Mostra informazioni nell'area di output
-        outputDiv.textContent = `Ultimo numero: ${nuovo}\nTotale numeri: ${ArrayNumeriCasuali.length}`;
-
-        aggiornaGrafico(); // Aggiorna la visualizzazione
-    }
-
-    // Fa partire la generazione  ogni 500ms
-    setInterval(calcola, 500);
-</script>
-
+       
+        setInterval(generaNumeriCasuali, 500);
+    </script>
 </body>
 </html>
+

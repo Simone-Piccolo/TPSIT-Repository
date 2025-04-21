@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generatore di Numeri Casuali 2 </title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Stile base della pagina */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 900px;
+            text-align: center;
+        }
+        canvas {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 14px;
+            white-space: pre-wrap;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Generatore di Numeri Casuali (0 - 1)</h1>
+    <!-- Output testuale dei dati -->
+    <div id="output"></div>
+    <!-- Canvas per Chart.js -->
+    <canvas id="grafico"></canvas>
+</div>
+
+<script>
+    // Array principali
+    let ArrayNumeriCasuali = []; // Contiene i numeri generati
+    let rapporti = [];           // Contiene i rapporti tra numeri successivi
+    let medie = [];              // Contiene la media ogni 50 numeri
+    let distanze = [];           // Contiene le distanze da 0.5 (centro del range)
+
+    const outputDiv = document.getElementById("output");
+
+    // Inizializzazione del grafico Chart.js
+    const ctx = document.getElementById('grafico').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [], // Etichette X (indice dei dati)
+            datasets: [
+                {
+                    label: 'Numeri Casuali',
+                    data: [],
+                    borderColor: 'blue',
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'Rapporti',
+                    data: [],
+                    borderColor: 'green',
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'Distanze dal Centro',
+                    data: [],
+                    borderColor: 'orange',
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'Medie (ogni 50)',
+                    data: [],
+                    borderColor: 'purple',
+                    borderDash: [5, 5],
+                    borderWidth: 1,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            animation: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 1.2 // Valore massimo dell'asse Y
+                }
+            }
+        }
+    });
+
+    // Funzione per aggiornare i dati sul grafico
+    function aggiornaGrafico() {
+        const labels = ArrayNumeriCasuali.map((_, i) => i); // Indici come etichette
+        chart.data.labels = labels;
+        chart.data.datasets[0].data = ArrayNumeriCasuali;
+        chart.data.datasets[1].data = rapporti;
+        chart.data.datasets[2].data = distanze;
+
+        // Prepara dataset medie (solo ai multipli di 50)
+        chart.data.datasets[3].data = Array(labels.length).fill(null);
+        for (let i = 49; i < ArrayNumeriCasuali.length; i += 50) {
+            chart.data.datasets[3].data[i] = medie[Math.floor(i / 50)];
+        }
+
+        chart.update(); // Aggiorna il grafico
+    }
+
+    // Funzione  che viene eseguita ogni 500ms
+    function calcola() {
+        // Genera un numero float tra 0 e 1 con 4 decimali
+        const nuovo = parseFloat((Math.random()).toFixed(4));
+        ArrayNumeriCasuali.push(nuovo); // Aggiunge all'array principale
+
+        // Calcola il rapporto con il numero precedente
+        if (ArrayNumeriCasuali.length > 1) {
+            let precedente = ArrayNumeriCasuali[ArrayNumeriCasuali.length - 2];
+            rapporti.push(parseFloat((nuovo / precedente).toFixed(4)));
+        } else {
+            rapporti.push(null); // Primo elemento non ha rapporto
+        }
+
+        // Calcola la distanza da 0.5 (centro del range 0–1)
+        distanze.push(parseFloat(Math.abs(nuovo - 0.5).toFixed(4)));
+
+        // Calcola la media ogni 50 numeri
+        if (ArrayNumeriCasuali.length % 50 === 0) {
+            const gruppo = ArrayNumeriCasuali.slice(-50); // Prendi gli ultimi 50
+            const somma = gruppo.reduce((acc, num) => acc + num, 0);
+            medie.push(parseFloat((somma / 50).toFixed(4)));
+        }
+
+        // Mostra informazioni nell'area di output
+        outputDiv.textContent = `Ultimo numero: ${nuovo}\nTotale numeri: ${ArrayNumeriCasuali.length}`;
+
+        aggiornaGrafico(); // Aggiorna la visualizzazione
+    }
+
+    // Fa partire la generazione  ogni 500ms
+    setInterval(calcola, 500);
+</script>
+
+</body>
+</html>

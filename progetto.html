@@ -84,7 +84,6 @@
     let questionIndex = 0;
     let possibleCharacters = [];
 
-    
     function loadCharacterList() {
       const characterListDiv = document.getElementById("characterList");
       characters.forEach(character => {
@@ -99,7 +98,6 @@
       });
     }
 
-    // Funzione per selezionare un personaggio
     function selectCharacter(name) {
       selectedCharacter = characters.find(c => c.name === name);
       document.getElementById("character-selection").style.display = "none";
@@ -107,14 +105,12 @@
       startGame();
     }
 
-    // Funzione per iniziare il gioco
     function startGame() {
       questionIndex = 0;
       possibleCharacters = [...characters];
       askQuestion();
     }
 
-    // Funzione per rispondere alle domande
     function answer(yes) {
       const question = questions[questionIndex];
       possibleCharacters = possibleCharacters.filter(c => yes ? question.filter(c) : !question.filter(c));
@@ -122,7 +118,6 @@
       askQuestion();
     }
 
-    // Funzione per mostrare la domanda o il risultato
     function askQuestion() {
       const questionDiv = document.getElementById("question");
       const resultDiv = document.getElementById("result");
@@ -141,12 +136,10 @@
       }
     }
 
-    // Lista delle domande, con il filtro per ciascuna domanda
     const questions = [
       { text: "È una donna?", filter: c => c.gender === "F" },
       { text: "È nato dopo il 1900?", filter: c => c.birthYear > 1900 },
-      { text: "È nato prima del 1800?", filter: c => c.birthYear < 1800 },
-      { text: "È ancora in vita nel 2025?", filter: c => c.birthYear > 1930 },
+      { text: "È nato prima del 1900?", filter: c => c.birthYear < 1900 },
       { text: "Ha vinto un premio Nobel?", filter: c => c.nobel },
       { text: "È noto per la fisica?", filter: c => c.field === "Fisica" },
       { text: "È noto per la chimica?", filter: c => c.field === "Chimica" },
@@ -157,7 +150,6 @@
       { text: "È noto per l’astronomia?", filter: c => c.field === "Astronomia" }
     ];
 
-    
     window.onload = loadCharacterList;
   </script>
 </body>

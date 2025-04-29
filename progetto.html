@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Indovina il personaggio STEAM</title>
+  <style>
+    
+    body {
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      padding: 30px; 
+    }
+    #question {
+      margin: 20px; 
+      font-size: 1.4em; 
+    }
+    #result img {
+      max-width: 200px; 
+      margin-top: 15px; 
+    }
+    button {
+      margin: 10px; 
+      padding: 10px 20px; 
+      font-size: 1em; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Indovina il personaggio STEAM</h1>
+  <div id="question">Clicca su Inizia per cominciare!</div>
+  <div id="buttons">
+    <button onclick="startGame()">Inizia</button>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    // Lista dei personaggi STEAM con dettagli (nome, genere, anno di nascita, campo di studio, premio Nobel e immagine)
+    const characters = [
+      {
+        name: "Albert Einstein", gender: "M", birthYear: 1879, field: "Fisica", nobel: true,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Albert_Einstein_Head.jpg/1200px-Albert_Einstein_Head.jpg"
+      },
+      {
+        name: "Marie Curie", gender: "F", birthYear: 1867, field: "Chimica", nobel: true,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Marie_Curie_c._1920s.jpg/960px-Marie_Curie_c._1920s.jpg"
+      },
+      {
+        name: "Isaac Newton", gender: "M", birthYear: 1643, field: "Fisica", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Portrait_of_Sir_Isaac_Newton%2C_1689.jpg/1200px-Portrait_of_Sir_Isaac_Newton%2C_1689.jpg"
+      },
+      {
+        name: "Ada Lovelace", gender: "F", birthYear: 1815, field: "Informatica", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Ada_Lovelace_portrait.jpg"
+      },
+      {
+        name: "Alan Turing", gender: "M", birthYear: 1912, field: "Informatica", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/1/17/Alan_Turing_%281912-1954%29_in_1936_at_Princeton_University.jpg"
+      },
+      {
+        name: "Galileo Galilei", gender: "M", birthYear: 1564, field: "Astronomia", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Justus_Sustermans_-_Portrait_of_Galileo_Galilei_%28Uffizi%29.jpg/1200px-Justus_Sustermans_-_Portrait_of_Galileo_Galilei_%28Uffizi%29.jpg"
+      },
+      {
+        name: "Rosalind Franklin", gender: "F", birthYear: 1920, field: "Biologia", nobel: false,
+        image: "https://content.storicang.it/medio/2021/07/20/rosalind-franklin-la-scienziata-che-scopri-la-struttura-del-dna_442acc64_800x1149.jpg"
+      },
+      {
+        name: "Stephen Hawking", gender: "M", birthYear: 1942, field: "Fisica", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Stephen_Hawking.StarChild.jpg"
+      },
+      {
+        name: "Grace Hopper", gender: "F", birthYear: 1906, field: "Informatica", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/5/55/Grace_Hopper.jpg"
+      },
+      {
+        name: "Charles Darwin", gender: "M", birthYear: 1809, field: "Biologia", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Charles_Darwin_01.jpg"
+      },
+      {
+        name: "Katherine Johnson", gender: "F", birthYear: 1918, field: "Matematica", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Katherine_Johnson_1983.jpg"
+      },
+      {
+        name: "Carl Sagan", gender: "M", birthYear: 1934, field: "Astronomia", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/b/be/Carl_Sagan_Planetary_Society.JPG"
+      },
+      {
+        name: "Niels Bohr", gender: "M", birthYear: 1885, field: "Fisica", nobel: true,
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Niels_Bohr.jpg"
+      },
+      {
+        name: "Barbara McClintock", gender: "F", birthYear: 1902, field: "Biologia", nobel: true,
+        image: "https://cdn.britannica.com/62/194762-050-59387496/Barbara-McClintock-1947.jpg"
+      },
+      {
+        name: "Sophie Germain", gender: "F", birthYear: 1776, field: "Matematica", nobel: false,
+        image: "https://www.z3xmi.it/get_image/5c2+sofia+germain.jpg"
+      },
+      {
+        name: "Leonardo da Vinci", gender: "M", birthYear: 1452, field: "Ingegneria", nobel: false,
+        image: "https://media-assets.ad-italia.it/photos/6350fb15e01317e24d2b018f/master/w_1600%2Cc_limit/GettyImages-148277064.jpg"
+      },
+      {
+        name: "Hedy Lamarr", gender: "F", birthYear: 1914, field: "Ingegneria", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Hedy_lamarr_-_1940.jpg/960px-Hedy_lamarr_-_1940.jpg"
+      },
+      {
+        name: "Blaise Pascal", gender: "M", birthYear: 1623, field: "Matematica", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Blaise_Pascal_Versailles.JPG/250px-Blaise_Pascal_Versailles.JPG"
+      },
+      {
+        name: "Emmy Noether", gender: "F", birthYear: 1882, field: "Matematica", nobel: false,
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Noether.jpg"
+      },
+      {
+        name: "Richard Feynman", gender: "M", birthYear: 1918, field: "Fisica", nobel: true,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Richard_Feynman_1959.png/1200px-Richard_Feynman_1959.png"
+      }
+    ];
+
+    // Lista delle domande, con il filtro per ciascuna domanda
+    const questions = [
+      { text: "È una donna?", filter: c => c.gender === "F" },
+      { text: "È nato dopo il 1900?", filter: c => c.birthYear > 1900 },
+      { text: "È nato prima del 1800?", filter: c => c.birthYear < 1800 },
+      { text: "È ancora in vita nel 2025?", filter: c => c.birthYear > 1930 },
+      { text: "Ha vinto un premio Nobel?", filter: c => c.nobel },
+      { text: "È noto per la fisica?", filter: c => c.field === "Fisica" },
+      { text: "È noto per la chimica?", filter: c => c.field === "Chimica" },
+      { text: "È noto per la biologia?", filter: c => c.field === "Biologia" },
+      { text: "È noto per la matematica?", filter: c => c.field === "Matematica" },
+      { text: "È noto per l’informatica?", filter: c => c.field === "Informatica" },
+      { text: "È noto per l’ingegneria?", filter: c => c.field === "Ingegneria" },
+      { text: "È noto per l’astronomia?", filter: c => c.field === "Astronomia" },
+    ];
+
+    let questionIndex = 0;  
+    let possibleCharacters = [];  // Array dei personaggi possibili in base alle risposte
+
+    // Funzione per iniziare il gioco
+    function startGame() {
+      questionIndex = 0;  
+      possibleCharacters = [...characters];  // Inizializza la lista dei personaggi possibili
+      // Mostra i pulsanti per rispondere alle domande
+      document.getElementById("buttons").innerHTML = `
+        <button onclick="answer(true)">Sì</button>
+        <button onclick="answer(false)">No</button>
+      `;
+      askQuestion();  // Pone la prima domanda
+    }
+
+    // Funzione per rispondere alle domande
+    function answer(yes) {
+      const question = questions[questionIndex];  // Ottiene la domanda corrente
+      // Filtra i personaggi in base alla risposta
+      possibleCharacters = possibleCharacters.filter(c =>
+        yes ? question.filter(c) : !question.filter(c)
+      );
+      questionIndex++;  
+      askQuestion();  // Pone la domanda successiva
+    }
+
+    // Funzione per mostrare la domanda o il risultato
+    function askQuestion() {
+      const questionDiv = document.getElementById("question");  
+      const resultDiv = document.getElementById("result");  
+      resultDiv.innerHTML = "";  // Resetta il risultato
+
+      // Se c'è un solo personaggio possibile, mostra il suo nome e la sua immagine
+      if (possibleCharacters.length === 1) {
+        const character = possibleCharacters[0];
+        questionDiv.innerText = "Il tuo personaggio è: " + character.name;
+        resultDiv.innerHTML = `<img src="${character.image}" alt="${character.name}">`;
+      } 
+      // Se non ci sono personaggi possibili, segnala che non è stato indovinato
+      else if (possibleCharacters.length === 0) {
+        questionDiv.innerText = "Non riesco a indovinare il personaggio. Riprova!";
+      } 
+      // Se ci sono ancora più di un personaggio possibile, mostra la domanda successiva
+      else if (questionIndex < questions.length) {
+        questionDiv.innerText = questions[questionIndex].text;
+      } 
+      // Se le domande sono finite e ci sono più personaggi possibili, mostra la lista dei nomi
+      else {
+        questionDiv.innerText = "Potrebbero essere: " +
+          possibleCharacters.map(c => c.name).join(", ");
+      }
+    }
+  </script>
+</body>
+</html>

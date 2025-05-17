@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clicca la Carta più Piccola - Gioco Colorato</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+    :root {
+      --bg: #121212;
+      --text: #e0e0e0;
+      --highlight: #00ff99;
+      --error: #ff3366;
+      --card-bg: #222;
+      --button-bg: #00ff99;
+      --button-hover: #00cc77;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      user-select: none;
+    }
+
+    h1 {
+      margin-bottom: 0;
+      font-weight: 700;
+      color: var(--highlight);
+      letter-spacing: 2px;
+    }
+
+    #levelSelect {
+      margin: 20px 0 40px;
+    }
+
+    select {
+      font-size: 1.2em;
+      padding: 8px 15px;
+      border-radius: 10px;
+      border: none;
+      background: var(--card-bg);
+      color: var(--text);
+      box-shadow: 0 0 10px var(--highlight);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    select:hover {
+      background: #333;
+    }
+
+    #gameBoard {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-gap: 20px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      width: 100px;
+      height: 140px;
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 0 15px transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: box-shadow 0.3s ease, transform 0.15s ease;
+      border: 3px solid transparent;
+      font-size: 4em;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .card:hover {
+      box-shadow: 0 0 25px var(--highlight);
+      transform: scale(1.1);
+    }
+
+    .correct {
+      border-color: var(--highlight);
+      box-shadow: 0 0 25px var(--highlight);
+    }
+    .wrong {
+      border-color: var(--error);
+      box-shadow: 0 0 25px var(--error);
+    }
+
+    #message {
+      font-size: 1.2em;
+      min-height: 30px;
+      margin-bottom: 20px;
+      height: 30px;
+      color: var(--highlight);
+      font-weight: 600;
+      text-align: center;
+      min-width: 320px;
+    }
+
+    #startBtn {
+      padding: 12px 35px;
+      font-size: 1.2em;
+      font-weight: 700;
+      border: none;
+      border-radius: 30px;
+      background: var(--button-bg);
+      color: #111;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--button-bg);
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    #startBtn:hover {
+      background: var(--button-hover);
+      box-shadow: 0 0 30px var(--button-hover);
+    }
+
+    #results {
+      margin-top: 20px;
+      font-size: 1.3em;
+      color: var(--highlight);
+      font-weight: 600;
+      min-height: 30px;
+      text-align: center;
+      min-width: 320px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Clicca la Carta più Piccola</h1>
+
+  <label for="levelSelect">Scegli difficoltà:</label>
+  <select id="levelSelect">
+    <option value="easy">Facile</option>
+    <option value="hard">Difficile</option>
+  </select>
+
+  <div id="message"></div>
+
+  <div id="gameBoard"></div>
+
+  <button id="startBtn">Inizia Gioco</button>
+
+  <div id="results"></div>
+
+  <script>
+    const gameBoard = document.getElementById('gameBoard');
+    const message = document.getElementById('message');
+    const startBtn = document.getElementById('startBtn');
+    const resultsDiv = document.getElementById('results');
+    const levelSelect = document.getElementById('levelSelect');
+
+    let numbers = [];
+    let startTime;
+    let reactionTimes = [];
+    let round = 0;
+    const totalRounds = 10;
+    let gameActive = false;
+
+    // Palette colori fissa e ben differenziata
+    const fixedColors = [
+      '#e6194b', // rosso
+      '#3cb44b', // verde
+      '#ffe119', // giallo
+      '#4363d8', // blu
+      '#f58231', // arancione
+      '#911eb4', // viola
+      '#42d4f4', // azzurro
+      '#f032e6', // rosa
+      '#bfef45', // lime
+      '#fabed4', // rosa chiaro
+      '#469990', // verde acqua
+      '#dcbeff'  // lilla chiaro
+    ];
+
+    // Genera numeri casuali
+    function generateNumbers(level) {
+      const arr = [];
+      let min, max;
+      if(level === 'easy') {
+        min = 1; max = 30;
+      } else {
+        min = 30; max = 99;
+      }
+
+      function randNum() {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      while(arr.length < 8) {
+        let n = randNum();
+        if(!arr.includes(n)) arr.push(n);
+      }
+      return arr;
+    }
+
+    // Mescola array (Fisher-Yates shuffle)
+    function shuffle(array) {
+      let currentIndex = array.length, randomIndex;
+
+      while(currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      }
+
+      return array;
+    }
+
+    // Mostra le carte con i numeri colorati
+    function displayNumbers(nums) {
+      gameBoard.innerHTML = '';
+
+      // Prendo gli 8 colori mescolati dalla palette fissa (o meno se palette più grande)
+      const colors = shuffle(fixedColors.slice()).slice(0, nums.length);
+
+      nums.forEach((num, i) => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.textContent = num;
+        card.style.color = colors[i];
+        card.onclick = () => handleClick(num, card);
+        gameBoard.appendChild(card);
+      });
+    }
+
+    // Gestisci click utente
+    function handleClick(num, card) {
+      if(!gameActive) return;
+
+      const elapsed = performance.now() - startTime;
+      const minNum = Math.min(...numbers);
+
+      if(num === minNum) {
+        reactionTimes.push(elapsed);
+        card.classList.add('correct');
+        message.textContent = `Bravo! Tempo reazione: ${elapsed.toFixed(0)} ms`;
+        nextRound();
+      } else {
+        card.classList.add('wrong');
+        message.textContent = 'Non è la carta più piccola! Riprova...';
+      }
+    }
+
+    // Passa al round successivo o finisci
+    function nextRound() {
+      round++;
+      gameActive = false;
+
+      if(round >= totalRounds) {
+        endGame();
+        return;
+      }
+
+      setTimeout(() => {
+        startRound();
+      }, 1200);
+    }
+
+    // Avvia un round
+    function startRound() {
+      message.textContent = 'Trova e clicca la carta più piccola!';
+      const level = levelSelect.value;
+      numbers = generateNumbers(level);
+      displayNumbers(numbers);
+      startTime = performance.now();
+      gameActive = true;
+    }
+
+    // Fine gioco: mostra risultati
+    function endGame() {
+      gameActive = false;
+      gameBoard.innerHTML = '';
+      message.textContent = '🎉 Gioco finito!';
+
+      const sum = reactionTimes.reduce((a,b) => a + b, 0);
+      const avg = sum / reactionTimes.length || 0;
+      resultsDiv.textContent = `Tempo medio di reazione: ${avg.toFixed(0)} ms su ${reactionTimes.length} risposte corrette.`;
+
+      startBtn.textContent = 'Rigioca';
+      startBtn.disabled = false;
+      levelSelect.disabled = false;
+    }
+
+    // Avvia gioco
+    function startGame() {
+      reactionTimes = [];
+      round = 0;
+      resultsDiv.textContent = '';
+      startBtn.textContent = 'Gioco in corso...';
+      startBtn.disabled = true;
+      levelSelect.disabled = true;
+      message.textContent = '';
+
+      startRound();
+    }
+
+    startBtn.addEventListener('click', () => {
+      if(!startBtn.disabled) {
+        startGame();
+      }
+    });
+  </script>
+
+</body>
+</html>

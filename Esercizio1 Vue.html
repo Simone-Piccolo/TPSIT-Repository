@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue Esercizi-Simone</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 1) Profilo Utente -->
+    <h2>Profilo Utente</h2>
+    <p>Nome: {{ nome }}</p>
+    <p>Cognome: {{ cognome }}</p>
+    <p>Città: {{ citta }}</p>
+
+    <!-- 2) Dettagli Prodotto -->
+    <h2>Dettagli Prodotto</h2>
+    <p>Il prodotto {{ nomeProdotto }} costa {{ prezzoProdotto }} €</p>
+
+    <!-- 3) Bottone Disabilitato -->
+    <h2>Bottone Disabilitato</h2>
+    <button v-bind:disabled="bottoneDisabilitato">Azione Importante</button>
+    <p>
+      Il bottone è attualmente:
+      <strong>{{ bottoneDisabilitato ? "Disattivato" : "Attivato" }}</strong>
+    </p>
+    <label>
+      <input type="checkbox" v-model="bottoneDisabilitato">
+      Disabilita/Abilita Bottone
+    </label>
+
+    <!-- 4) Tooltip Dinamico -->
+    <h2>Tooltip Dinamico</h2>
+    <p v-bind:title="messaggioTooltip">Passa il mouse su questo testo</p>
+    <input v-model="messaggioTooltip" placeholder="Scrivi un nuovo tooltip">
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        // Profilo Utente
+        nome: 'Simone',
+        cognome: 'Piccolo',
+        citta: 'Nichelino, provincia di Torino',
+
+        // Dettagli Prodotto
+        nomeProdotto: 'Wwe 2K25 Ps5',
+        prezzoProdotto: 80.00,
+
+        // Bottone Disabilitato
+        bottoneDisabilitato: true,
+
+        // Tooltip Dinamico
+        messaggioTooltip: 'Questo è un tooltip dinamico!'
+      }
+    });
+  </script>
+</body>
+</html>

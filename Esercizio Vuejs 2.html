@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Esercizio vue js 2</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 20px;
+background-color: #f4f4f4;
+}
+
+h2 {
+color: #333;
+margin-top: 30px;
+}
+
+.box {
+background-color: #fff;
+padding: 10px;
+border: 1px solid #ccc;
+margin-bottom: 20px;
+}
+
+.semaforo div {
+padding: 10px;
+margin: 5px 0;
+font-weight: bold;
+text-align: center;
+border-radius: 5px;
+}
+
+.rosso {
+background-color: red;
+color: white;
+}
+
+.giallo {
+background-color: gold;
+color: black;
+}
+
+.verde {
+background-color: green;
+color: white;
+}
+
+table.catalogo {
+width: 100%;
+border-collapse: collapse;
+background-color: #fff;
+margin-top: 10px;
+}
+
+table.catalogo th, table.catalogo td {
+border: 1px solid #ccc;
+padding: 8px;
+text-align: left;
+}
+
+ol {
+background-color: #fff;
+padding: 10px;
+border: 1px solid #ccc;
+}
+</style>
+</head>
+<body>
+
+<h2>Login Utente</h2>
+<div id="loginMessage" class="box"></div>
+
+<h2>Semaforo</h2>
+<div class="semaforo" id="semaforo"></div>
+
+<h2>Classifica Team Sportivi</h2>
+<ol id="classifica"></ol>
+
+<h2>Catalogo Prodotti</h2>
+<table class="catalogo">
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Prezzo (€)</th>
+</tr>
+</thead>
+<tbody id="catalogo"></tbody>
+</table>
+
+<script>
+// 1) Login Utente
+const isLoggedIn = true;
+document.getElementById("loginMessage").textContent = isLoggedIn
+? "Benvenuto, Utente!"
+: "Per favore, accedi.";
+
+// 2) Semaforo
+const coloreSemaforo = 'verde'; // può essere 'rosso', 'giallo', 'verde'
+const semaforo = document.getElementById("semaforo");
+
+if (coloreSemaforo === 'rosso') {
+semaforo.innerHTML = '<div class="rosso">Stop</div>';
+} else if (coloreSemaforo === 'giallo') {
+semaforo.innerHTML = '<div class="giallo">Attenzione</div>';
+} else if (coloreSemaforo === 'verde') {
+semaforo.innerHTML = '<div class="verde">Vai!</div>';
+}
+
+// 3) Classifica
+const teamPreferiti = ['Juventus', 'Real Madrid', 'Roma'];
+const classifica = document.getElementById("classifica");
+teamPreferiti.forEach(team => {
+const li = document.createElement("li");
+li.textContent = team;
+classifica.appendChild(li);
+});
+
+// 4) Catalogo Prodotti
+const prodotti = [
+{ id: 1, nome: 'Nintendo Switch 2', prezzo: 500.99 },
+{ id: 2, nome: 'Smartphone', prezzo: 699.49 },
+{ id: 3, nome: 'Playstation 5', prezzo: 559.99}
+];
+const catalogo = document.getElementById("catalogo");
+prodotti.forEach(prodotto => {
+const tr = document.createElement("tr");
+tr.innerHTML = `<td>${prodotto.id}</td><td>${prodotto.nome}</td><td>${prodotto.prezzo.toFixed(2)}</td>`;
+catalogo.appendChild(tr);
+});
+</script>
+
+</body>
+</html>

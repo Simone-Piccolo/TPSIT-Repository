@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercizio 3 vuejs</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    #app {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2 {
+      color: #039aff;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #af4ca2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #a04589;
+    }
+
+    hr {
+      border: 1px solid #131212;
+      margin: 20px 0;
+    }
+
+    form {
+      margin-top: 15px;
+    }
+
+    label {
+      font-size: 16px;
+      display: block;
+      margin-bottom: 5px;
+      color: #030303;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #a156e7;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    .radio-group label {
+      margin-right: 20px;
+    }
+
+    .form-summary {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #fcf8f8;
+      border: 1px solid #08aaf5;
+      border-radius: 8px;
+    }
+
+    .form-summary h3 {
+      color: #413f3f;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Cambia Messaggio -->
+    <div>
+      <h2>1 Cambia Messaggio</h2>
+      <p>{{ messaggio }}</p>
+      <button @click="cambiaMessaggio">Cambia Messaggio</button>
+    </div>
+    
+    <hr>
+
+    <!-- Accendi/Spegni luce -->
+    <div>
+      <h2>2 Accendi/Spegni</h2>
+      <p>{{ luceAccesa ? 'La luce è accesa' : 'La luce è spenta' }}</p>
+      <button @click="toggleLuce">Toggle Luce</button>
+    </div>
+
+    <hr>
+
+    <!-- Convertitore di Unità Semplice -->
+    <div>
+      <h2>3 Convertitore di Unità Semplice</h2>
+      <input v-model.number="kg" type="number" placeholder="Inserisci valore in kg" />
+      <p>{{ kg }} kg è uguale a {{ kg * 1000 }} grammi</p>
+    </div>
+
+    <hr>
+
+    <!-- Form di Registrazione Semplice -->
+    <div>
+      <h2>4 Form di Registrazione Semplice</h2>
+      <form>
+        <label for="nome">Nome:</label>
+        <input v-model="nome" type="text" id="nome" placeholder="Inserisci il tuo nome" />
+
+        <div class="radio-group">
+          <label>Genere:</label>
+          <label>
+            <input type="radio" v-model="genere" value="Uomo" /> Uomo
+          </label>
+          <label>
+            <input type="radio" v-model="genere" value="Donna" /> Donna
+          </label>
+          <label>
+            <input type="radio" v-model="genere" value="Altro" /> Altro
+          </label>
+        </div>
+
+        <div>
+          <label>Paese:</label>
+          <select v-model="paese">
+            <option value="Italia">Italia</option>
+            <option value="Germania">Germania</option>
+            <option value="Francia">Francia</option>
+          </select>
+        </div>
+      </form>
+
+      <div v-if="nome && genere && paese" class="form-summary">
+        <h3>Riepilogo</h3>
+        <p>Nome: {{ nome }}</p>
+        <p>Genere: {{ genere }}</p>
+        <p>Paese: {{ paese }}</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          messaggio: 'Clicca il bottone!',
+          luceAccesa: false,
+          kg: 0,
+          nome: '',
+          genere: '',
+          paese: 'Italia'
+        };
+      },
+      methods: {
+        cambiaMessaggio() {
+          this.messaggio = 'Hai cliccato il bottone!';
+        },
+        toggleLuce() {
+          this.luceAccesa = !this.luceAccesa;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

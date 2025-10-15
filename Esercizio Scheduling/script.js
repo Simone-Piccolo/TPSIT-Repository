@@ -1,20 +1,11 @@
-// ============================
-// Simulatore Scheduling 
-// ============================
 
-// Genera N processi casuali
-function generaTask(n) {
-  const tasks = [];
-  for (let i = 0; i < n; i++) {
-    tasks.push({
-      id: `P${i + 1}`,
-      burst: Math.floor(Math.random() * 9) + 1,
-      arrival: Math.floor(Math.random() * 5),
-      priority: Math.floor(Math.random() * 10) + 1
-    });
-  }
-  return tasks;
-}
+const tasks = [
+  { id: "P1", arrival: 0, burst: 20, priority: 1 },
+  { id: "P2", arrival: 8, burst: 5, priority: 2 },
+  { id: "P3", arrival: 3, burst: 12, priority: 3 },
+  { id: "P4", arrival: 10, burst: 6, priority: 4 },
+  { id: "P5", arrival: 7, burst: 8, priority: 5 },
+];
 
 // ---------- ALGORITMI ----------
 
@@ -33,7 +24,7 @@ function fcfs(tasks) {
   return result;
 }
 
-// SJF
+// SJF (non preemptive)
 function sjf(tasks) {
   let time = 0;
   let done = [];
@@ -55,13 +46,12 @@ function sjf(tasks) {
   return done;
 }
 
-// RR
+// Round Robin
 function rr(tasks, quantum = 3) {
   let time = 0;
   let queue = [];
   let remaining = tasks.map(t => ({ ...t, rem: t.burst }));
   let result = [];
-  let finished = [];
 
   while (remaining.length > 0 || queue.length > 0) {
     for (let t of remaining) {
@@ -91,7 +81,7 @@ function rr(tasks, quantum = 3) {
   return result;
 }
 
-// Priority
+// Priority Scheduling (non preemptive)
 function priorityScheduling(tasks) {
   let time = 0;
   let done = [];
@@ -161,9 +151,7 @@ function mostraRisultato(nome, dati, container) {
 
 // ---------- MAIN ----------
 document.getElementById("simulateBtn").addEventListener("click", () => {
-  const n = parseInt(document.getElementById("numTasks").value);
   const q = parseInt(document.getElementById("quantum").value);
-  const tasks = generaTask(n);
   const resDiv = document.getElementById("results");
   resDiv.innerHTML = "";
 

@@ -3,159 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scheduling</title>
+    <title>Esercizio Scheduling</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-    <h1>🧠 Esercizio Calcoli Scheduling</h1>
 
-    <h2>Valori da calcolare</h2>
-    <table>
-        <tr>
-            <th>Processo</th>
-            <th>Tempo di Arrivo (ms)</th>
-            <th>Tempo di Esecuzione (ms)</th>
-        </tr>
-        <tr><td>P1</td><td>0</td><td>20</td></tr>
-        <tr><td>P2</td><td>8</td><td>5</td></tr>
-        <tr><td>P3</td><td>3</td><td>12</td></tr>
-        <tr><td>P4</td><td>10</td><td>6</td></tr>
-        <tr><td>P5</td><td>7</td><td>8</td></tr>
-    </table>
+    <header>
+        <h1>Esercizio Calcoli Scheduling</h1>
+    </header>
 
-    <hr>
+    <section>
+        <h2>Valori da calcolare</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Processo</th>
+                    <th>Tempo di Arrivo (ms)</th>
+                    <th>Tempo di Esecuzione (ms)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>P1</td><td>0</td><td>20</td></tr>
+                <tr><td>P2</td><td>8</td><td>5</td></tr>
+                <tr><td>P3</td><td>3</td><td>12</td></tr>
+                <tr><td>P4</td><td>10</td><td>6</td></tr>
+                <tr><td>P5</td><td>7</td><td>8</td></tr>
+            </tbody>
+        </table>
+    </section>
 
-    <h2>Simulazione Algoritmi</h2>
-    <div class="controls">
-        <label>Quantum (per Round Robin):</label>
-        <input type="number" id="quantum" value="3" min="1" max="10">
-        <button id="simulateBtn">Simula</button>
-    </div>
+    <section>
+        <h2>Risultati calcolati per algoritmo</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Algoritmo</th>
+                    <th>Tempo Medio di Attesa (ms)</th>
+                    <th>Tempo Medio di Turnaround (ms)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>FCFS</td><td>21.8</td><td>32</td></tr>
+                <tr><td>SJF ( Non-preemptive)</td><td>17.4</td><td>27.6</td></tr>
+                <tr><td>SJF  Preemptive </td><td>12.8</td><td>23</td></tr>
+            </tbody>
+        </table>
+    </section>
 
-    <div id="results"></div>
-</div>
+    <section>
+        <h2>Calcoli FCFS</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Processo</th>
+                    <th>t Arrivo</th>
+                    <th>t Esecuzione</th>
+                    <th>t Completamento</th>
+                    <th>t Turnaround</th>
+                    <th>t Attesa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>P1</td><td>0</td><td>20</td><td>20</td><td>20</td><td>0</td></tr>
+                <tr><td>P3</td><td>3</td><td>12</td><td>32</td><td>29</td><td>17</td></tr>
+                <tr><td>P5</td><td>7</td><td>8</td><td>40</td><td>33</td><td>25</td></tr>
+                <tr><td>P2</td><td>8</td><td>5</td><td>45</td><td>37</td><td>32</td></tr>
+                <tr><td>P4</td><td>10</td><td>6</td><td>51</td><td>41</td><td>35</td></tr>
+            </tbody>
+        </table>
 
-<script>
+        <h3>Gantt Chart FCFS</h3>
+        <div class="gantt">
+            <div class="process p1" style="width:20%;">P1</div>
+            <div class="process p3" style="width:12%;">P3</div>
+            <div class="process p5" style="width:8%;">P5</div>
+            <div class="process p2" style="width:5%;">P2</div>
+            <div class="process p4" style="width:6%;">P4</div>
+        </div>
+    </section>
 
-const tasks = [
-  { id: "P1", arrival: 0, burst: 20, priority: 1 },
-  { id: "P2", arrival: 8, burst: 5, priority: 2 },
-  { id: "P3", arrival: 3, burst: 12, priority: 3 },
-  { id: "P4", arrival: 10, burst: 6, priority: 4 },
-  { id: "P5", arrival: 7, burst: 8, priority: 5 },
-];
-
-// ---------- ALGORITMI ----------
-function fcfs(tasks) {
-  let time = 0;
-  let result = [];
-  const sorted = [...tasks].sort((a, b) => a.arrival - b.arrival);
-  for (let t of sorted) {
-    if (time < t.arrival) time = t.arrival;
-    let start = time;
-    let end = start + t.burst;
-    time = end;
-    result.push({ id: t.id, start, end, waiting: start - t.arrival, turnaround: end - t.arrival });
-  }
-  return result;
-}
-
-function sjf(tasks) {
-  let time = 0;
-  let done = [];
-  let remaining = [...tasks];
-  while (remaining.length > 0) {
-    let available = remaining.filter(t => t.arrival <= time);
-    if (available.length === 0) { time++; continue; }
-    available.sort((a,b)=>a.burst-b.burst);
-    let t = available[0];
-    remaining = remaining.filter(x=>x.id!==t.id);
-    let start = time;
-    let end = start + t.burst;
-    time = end;
-    done.push({id:t.id,start,end,waiting:start-t.arrival,turnaround:end-t.arrival});
-  }
-  return done;
-}
-
-function rr(tasks, quantum=3) {
-  let time=0, queue=[], remaining=tasks.map(t=>({...t, rem:t.burst})), result=[];
-  while(remaining.length>0 || queue.length>0){
-    for(let t of remaining) if(t.arrival<=time && !queue.includes(t)) queue.push(t);
-    remaining=remaining.filter(t=>!queue.includes(t));
-    if(queue.length===0){time++; continue;}
-    let t=queue.shift();
-    let start=time, exec=Math.min(quantum,t.rem);
-    t.rem-=exec;
-    time+=exec;
-    if(t.rem>0){
-      for(let newT of remaining) if(newT.arrival<=time && !queue.includes(newT)) queue.push(newT);
-      queue.push(t);
-    }else{
-      result.push({id:t.id,start,end:time,waiting:time-t.arrival-t.burst,turnaround:time-t.arrival});
-    }
-  }
-  return result;
-}
-
-function priorityScheduling(tasks) {
-  let time=0, done=[], remaining=[...tasks];
-  while(remaining.length>0){
-    let available=remaining.filter(t=>t.arrival<=time);
-    if(available.length===0){time++; continue;}
-    available.sort((a,b)=>a.priority-b.priority);
-    let t=available[0];
-    remaining=remaining.filter(x=>x.id!==t.id);
-    let start=time, end=start+t.burst;
-    time=end;
-    done.push({id:t.id,start,end,waiting:start-t.arrival,turnaround:end-t.arrival});
-  }
-  return done;
-}
-
-// ---------- VISUALIZZAZIONE ----------
-function creaGantt(result, container){
-  const gantt=document.createElement("div");
-  gantt.className="gantt";
-  const colors={}, palette=["#ff7675","#74b9ff","#55efc4","#fdcb6e","#a29bfe","#fab1a0","#81ecec","#ffeaa7"];
-  let totalTime=Math.max(...result.map(r=>r.end));
-  for(let r of result) if(!colors[r.id]) colors[r.id]=palette[Object.keys(colors).length%palette.length];
-  for(let r of result){
-    const bar=document.createElement("div");
-    bar.className="bar";
-    bar.textContent=r.id;
-    bar.style.backgroundColor=colors[r.id];
-    bar.style.width=((r.end-r.start)/totalTime*100)+"%";
-    gantt.appendChild(bar);
-  }
-  container.appendChild(gantt);
-}
-
-function mostraRisultato(nome,dati,container){
-  const section=document.createElement("div");
-  section.className="algorithm";
-  const title=document.createElement("h2");
-  title.textContent=nome;
-  section.appendChild(title);
-  creaGantt(dati,section);
-  const table=document.createElement("table");
-  const head=`<tr><th>Processo</th><th>Start</th><th>End</th><th>Waiting</th><th>Turnaround</th></tr>`;
-  table.innerHTML=head+dati.map(r=>`<tr><td>${r.id}</td><td>${r.start}</td><td>${r.end}</td><td>${r.waiting}</td><td>${r.turnaround}</td></tr>`).join("");
-  section.appendChild(table);
-  container.appendChild(section);
-}
-
-// ---------- MAIN ----------
-document.getElementById("simulateBtn").addEventListener("click",()=>{
-  const q=parseInt(document.getElementById("quantum").value);
-  const resDiv=document.getElementById("results");
-  resDiv.innerHTML="";
-  mostraRisultato("FCFS",fcfs(tasks),resDiv);
-  mostraRisultato("SJF Non-preemptive",sjf(tasks),resDiv);
-  mostraRisultato(`Round Robin (q=${q})`,rr(tasks,q),resDiv);
-  mostraRisultato("Priority Scheduling",priorityScheduling(tasks),resDiv);
-});
-</script>
 </body>
 </html>

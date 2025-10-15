@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulatore Scheduling </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Simulatore di Scheduling </h1>
+    <p>Simula e visualizza i principali algoritmi di scheduling .</p>
+
+    <div class="controls">
+      <label>Numero di processi:</label>
+      <input type="number" id="numTasks" value="5" min="1" max="20">
+      <label>Quantum (per Round Robin):</label>
+      <input type="number" id="quantum" value="3" min="1" max="10">
+      <button id="simulateBtn">Simula</button>
+    </div>
+
+    <div id="results"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

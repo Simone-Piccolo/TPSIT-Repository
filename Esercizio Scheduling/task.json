@@ -1,0 +1,8 @@
+{
+  "tasks": [
+    { "id": 1, "arrivalTime": 0, "burstTime": 5, "priority": 2 },
+    { "id": 2, "arrivalTime": 1, "burstTime": 3, "priority": 1 },
+    { "id": 3, "arrivalTime": 2, "burstTime": 8, "priority": 4 },
+    { "id": 4, "arrivalTime": 3, "burstTime": 6, "priority": 3 }
+  ]
+}

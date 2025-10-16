@@ -1,0 +1,110 @@
+/* 🌙 Tema generale */
+body {
+  background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+  color: #e4e4e4;
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🧱 Contenitore principale */
+.container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  margin-top: 3rem;
+}
+
+/* ✨ Titolo */
+h1 {
+  color: #00c9a7;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(0, 201, 167, 0.3);
+}
+
+/* 📦 Card styling */
+.card {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0, 201, 167, 0.1);
+}
+
+/* 🧠 Bottoni */
+button.btn {
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary {
+  color: #00c9a7;
+  border-color: #00c9a7;
+}
+
+.btn-outline-secondary:hover {
+  background: #00c9a7;
+  color: #1e1e2f;
+}
+
+.btn-primary {
+  background: #00c9a7;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #00e0b7;
+}
+
+/* 🧾 Risultati */
+pre#output {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: "Fira Code", monospace;
+  color: #d9f8f3;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* 📁 File input */
+input[type="file"] {
+  color: #ddd;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+input[type="file"]::file-selector-button {
+  background: #00c9a7;
+  color: #1e1e2f;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #00e0b7;
+}
+
+/* 📱 Responsività */
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1.5rem;
+  }
+
+  pre#output {
+    font-size: 0.85rem;
+  }
+}

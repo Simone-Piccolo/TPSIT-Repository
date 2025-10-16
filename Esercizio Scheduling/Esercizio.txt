@@ -1,1 +1,0 @@
-questo è l'esercizio sugli algoritmi di scheduling.

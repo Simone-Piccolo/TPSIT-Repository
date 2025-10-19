@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Esercizio 3 Vuejs</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    hr {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- 1. Cambia Messaggio -->
+  <h2>1. Cambia Messaggio</h2>
+  <p id="messaggio">Clicca il bottone per cambiare messaggio.</p>
+  <button id="btnMessaggio">Clicca qui</button>
+
+  <hr />
+
+  <!-- 2. Accendi/Spegni -->
+  <h2>2. Accendi/Spegni</h2>
+  <p id="statoLuce">La luce è spenta ⚫</p>
+  <button id="btnLuce">Toggle Luce</button>
+
+  <hr />
+
+  <!-- 3. Convertitore di Unità -->
+  <h2>3. Convertitore di Unità (Kg → g)</h2>
+  <label>
+    Inserisci peso in chilogrammi:
+    <input type="number" id="inputKg" />
+  </label>
+  <p id="risultatoConversione">0 kg = 0 g</p>
+
+  <hr />
+
+  <!-- 4. Form di Registrazione -->
+  <h2>4. Form di Registrazione Semplice</h2>
+  <form id="formRegistrazione">
+    <div>
+      <label>Nome:</label>
+      <input type="text" id="nome" />
+    </div>
+
+    <div>
+      <p>Genere:</p>
+      <label><input type="radio" name="genere" value="Uomo" /> Uomo</label>
+      <label><input type="radio" name="genere" value="Donna" /> Donna</label>
+      <label><input type="radio" name="genere" value="Altro" /> Altro</label>
+    </div>
+
+    <div>
+      <p>Paese:</p>
+      <select id="paese">
+        <option value="">Seleziona un paese</option>
+        <option>Italia</option>
+        <option>Germania</option>
+        <option>Francia</option>
+      </select>
+    </div>
+  </form>
+
+  <p id="riepilogo"></p>
+
+  <!-- Importa lo script JS -->
+  <script src="script.js"></script>
+</body>
+</html>

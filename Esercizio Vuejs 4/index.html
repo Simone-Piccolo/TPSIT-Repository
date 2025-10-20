@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esercizio Vue.js 4</title>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+<h2>Controllo Maggiore Età</h2>
+<input type="number" v-model.number="eta" placeholder="Inserisci la tua età">
+<p>Risultato: {{ messaggioEta }}</p>
+
+<hr>
+
+<h2>Carrello Semplice</h2>
+<ul>
+<li v-for="(p, index) in carrello" :key="index">
+{{ p.nome }} - €{{ p.prezzo }}
+</li>
+</ul>
+<p><strong>Totale carrello:</strong> €{{ totaleCarrello }}</p>
+
+<hr>
+
+<h2>Validazione Input Username</h2>
+<input type="text" v-model="username" placeholder="Inserisci username">
+<p v-if="erroreUsername" style="color: red;">{{ erroreUsername }}</p>
+
+<hr>
+
+<h2>Salvataggio Automatico</h2>
+<textarea v-model="testo" rows="4" cols="40" placeholder="Scrivi qualcosa..."></textarea>
+<p>{{ statoSalvataggio }}</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Esercizi Semplici</title>
+<style>
+body { font-family: Arial; margin: 20px; }
+.box { padding: 10px; margin-bottom: 10px; color: white; border-radius: 5px; }
+.success { background: green; }
+.error { background: red; }
+.avatar { display: flex; align-items: center; justify-content: center; color: white; margin-top: 10px; border-radius: 5px; }
+.saluto { background: lightblue; padding: 10px; border-radius: 5px; margin-top: 5px; }
+.card { border: 1px solid #ccc; padding: 10px; border-radius: 5px; margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<h2>1. Stato del Messaggio</h2>
+<div id="messaggio" class="box">Questo è un messaggio.</div>
+<button id="btnSuccesso">Successo</button>
+<button id="btnErrore">Errore</button>
+<button id="btnReset">Reset</button>
+
+<hr>
+
+<h2>2. Avatar Personalizzabile</h2>
+Larghezza: <input type="number" id="w" value="100">
+Altezza: <input type="number" id="h" value="100">
+Colore: <input type="color" id="colore" value="#0099ff">
+<div id="avatar" class="avatar" style="width:100px; height:100px; background:#0099ff;">A</div>
+
+<hr>
+
+<h2>3. Saluto Personale</h2>
+<div class="saluto">Benvenuto nella nostra applicazione!</div>
+<div class="saluto">Benvenuto nella nostra applicazione!</div>
+
+<hr>
+
+<h2>4. Card Semplice</h2>
+<div class="card">
+<h3>Titolo della Card</h3>
+<p>Contenuto della card...</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>        

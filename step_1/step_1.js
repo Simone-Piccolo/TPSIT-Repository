@@ -1,41 +1,32 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("post"));
 
-// Pagina /post con form minimale
-app.get('/post', (req, res) => {
-    res.send(`
-        <form action="/post" method="POST">
-            <input type="text" name="titolo" placeholder="Titolo" required />
-            <button type="submit">Salva</button>
-        </form>
-    `);
+app.get("/post", (req, res) => {
+  res.sendFile(path.join(__dirname, "post", "post.html"));
 });
 
-// Salvataggio dati in post.json
-app.post('/post', (req, res) => {
-    const filePath = path.join(__dirname, 'post.json');
-    const newPost = req.body;
+app.post("/post", (req, res) => {
+  const filePath = path.join(__dirname, "post.json");
 
-    let posts = [];
+  let data = [];
+  if (fs.existsSync(filePath)) {
+    data = JSON.parse(fs.readFileSync(filePath));
+  }
 
-    if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath);
-        posts = JSON.parse(data);
-    }
+  data.push({ title: req.body.title });
 
-    posts.push(newPost);
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 
-    fs.writeFileSync(filePath, JSON.stringify(posts, null, 2));
-
-    res.send("Salvato");
+  res.send("Salvato");
 });
 
 app.listen(PORT, () => {
-    console.log(`Server avviato su http://localhost:${PORT}`);
+  console.log(`Server avviato su http://localhost:${PORT}`);
 });
